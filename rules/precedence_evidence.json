@@ -1,0 +1,417 @@
+{
+  "rule_set_version": "904df479f483",
+  "payers": {
+    "PY01": {
+      "current_order": [
+        "D01",
+        "D09",
+        "D07",
+        "D08",
+        "D02",
+        "D03",
+        "D05"
+      ],
+      "pairs": {
+        "D01 over D03": {
+          "claims": 11,
+          "examples": [
+            "C004856",
+            "C011843",
+            "C013944",
+            "C006254",
+            "C016996"
+          ]
+        },
+        "D01 over D07": {
+          "claims": 2,
+          "examples": [
+            "C005350",
+            "C008493"
+          ]
+        },
+        "D01 over D08": {
+          "claims": 3,
+          "examples": [
+            "C011726",
+            "C002509",
+            "C009782"
+          ]
+        },
+        "D02 over D03": {
+          "claims": 7,
+          "examples": [
+            "C016172",
+            "C016586",
+            "C014434",
+            "C004906",
+            "C008094"
+          ]
+        },
+        "D03 over D05": {
+          "claims": 1,
+          "examples": [
+            "C021464"
+          ]
+        },
+        "D07 over D03": {
+          "claims": 5,
+          "examples": [
+            "C017916",
+            "C016689",
+            "C004845",
+            "C001316",
+            "C012074"
+          ]
+        },
+        "D08 over D03": {
+          "claims": 4,
+          "examples": [
+            "C014258",
+            "C016483",
+            "C002825",
+            "C002290"
+          ]
+        },
+        "D09 over D02": {
+          "claims": 2,
+          "examples": [
+            "C011400",
+            "C003212"
+          ]
+        },
+        "D09 over D03": {
+          "claims": 20,
+          "examples": [
+            "C011701",
+            "C011400",
+            "C011929",
+            "C016001",
+            "C009706"
+          ]
+        },
+        "D09 over D05": {
+          "claims": 1,
+          "examples": [
+            "C021520"
+          ]
+        },
+        "D09 over D07": {
+          "claims": 3,
+          "examples": [
+            "C003214",
+            "C009004",
+            "C011535"
+          ]
+        },
+        "D09 over D08": {
+          "claims": 6,
+          "examples": [
+            "C016814",
+            "C000913",
+            "C007313",
+            "C015249",
+            "C018821"
+          ]
+        }
+      },
+      "pairs_seen_both_ways": [],
+      "claims_where_current_order_disagrees": [],
+      "pairs_never_observed": [
+        "D01/D09",
+        "D01/D02",
+        "D01/D05",
+        "D07/D08",
+        "D02/D07",
+        "D02/D08",
+        "D02/D05",
+        "D05/D07",
+        "D05/D08"
+      ]
+    },
+    "PY02": {
+      "current_order": [
+        "D01",
+        "D09",
+        "D07",
+        "D08",
+        "D04",
+        "D05",
+        "D06",
+        "D02"
+      ],
+      "pairs": {
+        "D01 over D04": {
+          "claims": 2,
+          "examples": [
+            "C007388",
+            "C014587"
+          ]
+        },
+        "D01 over D06": {
+          "claims": 5,
+          "examples": [
+            "C006710",
+            "C011275",
+            "C018267",
+            "C000024",
+            "C011587"
+          ]
+        },
+        "D01 over D07": {
+          "claims": 2,
+          "examples": [
+            "C013127",
+            "C013775"
+          ]
+        },
+        "D01 over D08": {
+          "claims": 1,
+          "examples": [
+            "C018267"
+          ]
+        },
+        "D04 over D06": {
+          "claims": 4,
+          "examples": [
+            "C002389",
+            "C005016",
+            "C018024",
+            "C018736"
+          ]
+        },
+        "D05 over D06": {
+          "claims": 4,
+          "examples": [
+            "C021539",
+            "C021473",
+            "C021481",
+            "C021511"
+          ]
+        },
+        "D06 over D02": {
+          "claims": 2,
+          "examples": [
+            "C009632",
+            "C004960"
+          ]
+        },
+        "D07 over D06": {
+          "claims": 3,
+          "examples": [
+            "C012264",
+            "C014802",
+            "C018866"
+          ]
+        },
+        "D08 over D02": {
+          "claims": 2,
+          "examples": [
+            "C016707",
+            "C006647"
+          ]
+        },
+        "D08 over D06": {
+          "claims": 1,
+          "examples": [
+            "C005268"
+          ]
+        },
+        "D09 over D02": {
+          "claims": 2,
+          "examples": [
+            "C005584",
+            "C009874"
+          ]
+        },
+        "D09 over D04": {
+          "claims": 2,
+          "examples": [
+            "C010386",
+            "C014960"
+          ]
+        },
+        "D09 over D06": {
+          "claims": 10,
+          "examples": [
+            "C013163",
+            "C015614",
+            "C010386",
+            "C005527",
+            "C009398"
+          ]
+        },
+        "D09 over D07": {
+          "claims": 2,
+          "examples": [
+            "C009404",
+            "C000393"
+          ]
+        }
+      },
+      "pairs_seen_both_ways": [],
+      "claims_where_current_order_disagrees": [],
+      "pairs_never_observed": [
+        "D01/D09",
+        "D01/D05",
+        "D01/D02",
+        "D07/D08",
+        "D08/D09",
+        "D04/D07",
+        "D04/D08",
+        "D04/D05",
+        "D05/D09",
+        "D05/D07",
+        "D05/D08",
+        "D02/D07",
+        "D02/D04",
+        "D02/D05"
+      ]
+    },
+    "PY03": {
+      "current_order": [
+        "D01",
+        "D07",
+        "D08",
+        "D10",
+        "D09",
+        "D02",
+        "D03",
+        "D05"
+      ],
+      "pairs": {
+        "D01 over D02": {
+          "claims": 3,
+          "examples": [
+            "C006040",
+            "C008732",
+            "C000417"
+          ]
+        },
+        "D01 over D03": {
+          "claims": 2,
+          "examples": [
+            "C000674",
+            "C000417"
+          ]
+        },
+        "D01 over D10": {
+          "claims": 3,
+          "examples": [
+            "C000674",
+            "C017636",
+            "C017708"
+          ]
+        },
+        "D02 over D03": {
+          "claims": 4,
+          "examples": [
+            "C013152",
+            "C000230",
+            "C003070",
+            "C009232"
+          ]
+        },
+        "D07 over D03": {
+          "claims": 2,
+          "examples": [
+            "C008555",
+            "C016353"
+          ]
+        },
+        "D07 over D09": {
+          "claims": 3,
+          "examples": [
+            "C003125",
+            "C016750",
+            "C008555"
+          ]
+        },
+        "D07 over D10": {
+          "claims": 2,
+          "examples": [
+            "C016750",
+            "C016923"
+          ]
+        },
+        "D08 over D02": {
+          "claims": 2,
+          "examples": [
+            "C016358",
+            "C007985"
+          ]
+        },
+        "D08 over D03": {
+          "claims": 2,
+          "examples": [
+            "C005738",
+            "C007985"
+          ]
+        },
+        "D08 over D09": {
+          "claims": 2,
+          "examples": [
+            "C015130",
+            "C015826"
+          ]
+        },
+        "D09 over D02": {
+          "claims": 4,
+          "examples": [
+            "C008677",
+            "C005615",
+            "C012814",
+            "C006893"
+          ]
+        },
+        "D09 over D03": {
+          "claims": 4,
+          "examples": [
+            "C015890",
+            "C018712",
+            "C017512",
+            "C006893"
+          ]
+        },
+        "D10 over D02": {
+          "claims": 1,
+          "examples": [
+            "C018269"
+          ]
+        },
+        "D10 over D05": {
+          "claims": 1,
+          "examples": [
+            "C021440"
+          ]
+        },
+        "D10 over D09": {
+          "claims": 12,
+          "examples": [
+            "C014259",
+            "C014155",
+            "C006770",
+            "C013275",
+            "C002179"
+          ]
+        }
+      },
+      "pairs_seen_both_ways": [],
+      "claims_where_current_order_disagrees": [],
+      "pairs_never_observed": [
+        "D01/D07",
+        "D01/D08",
+        "D01/D09",
+        "D01/D05",
+        "D07/D08",
+        "D08/D10",
+        "D02/D07",
+        "D02/D05",
+        "D03/D10",
+        "D03/D05",
+        "D05/D07",
+        "D05/D08",
+        "D05/D09"
+      ]
+    }
+  }
+}

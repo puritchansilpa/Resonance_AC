@@ -1,0 +1,97 @@
+{
+  "payer_id": "PY02",
+  "payer_name": "Harbor Medicaid Plan",
+  "denial_precedence": ["D01", "D09", "D07", "D08", "D04", "D05", "D06", "D02"],
+  "precedence_source": {
+    "type": "learned_from_history",
+    "note": "Order the payer reports when a claim breaks several rules. Learned from history claims that break two or more rules (python -m claimcheck.precedence; evidence in rules/precedence_evidence.json). No pair was seen both ways. D04 vs D05 and D05 vs D07/D08 were never observed."
+  },
+  "rules": [
+    {
+      "rule_id": "PY02-EVV",
+      "kind": "evv_required",
+      "denial_code": "D01",
+      "params": {},
+      "source": {"type": "document", "ref": "PY02_harbor_provider_manual.md Visit verification",
+                 "quote": "Harbor pays only for care supported by a verified EVV visit on the date of service"}
+    },
+    {
+      "rule_id": "PY02-UNITS",
+      "kind": "units_within_verified_time",
+      "denial_code": "D09",
+      "params": {"rounding": "whole_units_only"},
+      "source": {"type": "document", "ref": "PY02_harbor_provider_manual.md Visit verification",
+                 "quote": "Only complete 15-minute increments of verified time may be billed"}
+    },
+    {
+      "rule_id": "PY02-AUTH-REQUIRED",
+      "kind": "auth_required",
+      "denial_code": "D07",
+      "params": {},
+      "source": {"type": "document", "ref": "PY02_harbor_provider_manual.md Authorizations",
+                 "quote": "Claims must reference the member's current Harbor authorization"}
+    },
+    {
+      "rule_id": "PY02-AUTH-MATCH",
+      "kind": "auth_matches",
+      "denial_code": "D08",
+      "params": {},
+      "source": {"type": "document", "ref": "PY02_harbor_provider_manual.md Authorizations",
+                 "quote": "current Harbor authorization for the service billed"}
+    },
+    {
+      "rule_id": "PY02-AUTH-BALANCE",
+      "kind": "auth_balance",
+      "denial_code": "D02",
+      "params": {},
+      "source": {"type": "document", "ref": "PY02_harbor_provider_manual.md Authorizations",
+                 "quote": "claims above the remaining balance are denied"}
+    },
+    {
+      "rule_id": "PY02-MOD-U2",
+      "kind": "modifier_required",
+      "denial_code": "D04",
+      "params": {"service_codes": ["T1019"], "modifier": "U2"},
+      "effective": {"basis": "date_of_service", "to": "2026-08-31"},
+      "source": {"type": "document", "ref": "PY02_harbor_provider_manual.md Modifiers",
+                 "quote": "Personal care (T1019) must be billed with modifier U2"}
+    },
+    {
+      "rule_id": "PY02-MOD-U2-WEEKDAY",
+      "kind": "modifier_required",
+      "denial_code": "D04",
+      "params": {"service_codes": ["T1019"], "modifier": "U2", "days_of_week": ["Mon", "Tue", "Wed", "Thu", "Fri"]},
+      "effective": {"basis": "date_of_service", "from": "2026-09-01"},
+      "source": {"type": "document", "ref": "PY02_harbor_bulletin_2026-08.md",
+                 "quote": "Weekday T1019 continues to use U2"}
+    },
+    {
+      "rule_id": "PY02-MOD-U3-WEEKEND",
+      "kind": "modifier_required",
+      "denial_code": "D04",
+      "params": {"service_codes": ["T1019"], "modifier": "U3", "days_of_week": ["Sat", "Sun"]},
+      "effective": {"basis": "date_of_service", "from": "2026-09-01"},
+      "source": {"type": "document", "ref": "PY02_harbor_bulletin_2026-08.md",
+                 "quote": "personal care (T1019) delivered on a Saturday or Sunday must be billed with modifier U3 instead of U2"}
+    },
+    {
+      "rule_id": "PY02-DAILY-MAX",
+      "kind": "daily_unit_max",
+      "denial_code": "D06",
+      "params": {"max_units": 32},
+      "source": {"type": "document", "ref": "PY02_harbor_provider_manual.md Daily maximum",
+                 "quote": "no more than 32 units per day across all HCBS services combined"}
+    },
+    {
+      "rule_id": "PY02-DUPLICATE",
+      "kind": "no_duplicates",
+      "denial_code": "D05",
+      "params": {},
+      "source": {"type": "document", "ref": "PY02_harbor_provider_manual.md Duplicates",
+                 "quote": "Harbor checks every claim against its claims history and denies duplicates"}
+    }
+  ],
+  "not_applied": [
+    {"topic": "timely_filing", "note": "Harbor does not apply a timely filing limit to in-state HCBS providers (manual, Filing limits). History has no Harbor D03, with filing lags up to 110 days."}
+  ]
+}

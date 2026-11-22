@@ -1,0 +1,82 @@
+{
+  "payer_id": "PY03",
+  "payer_name": "Summit Care Partners",
+  "denial_precedence": ["D01", "D07", "D08", "D10", "D09", "D02", "D03", "D05"],
+  "precedence_source": {
+    "type": "learned_from_history",
+    "note": "Order the payer reports when a claim breaks several rules. Learned from history claims that break two or more rules (python -m claimcheck.precedence; evidence in rules/precedence_evidence.json). No pair was seen both ways. Unlike Northwind and Harbor, Summit reports authorization problems (D07, D08) ahead of D09. D05 vs D02/D03 was never observed and is placed last by analogy with Northwind."
+  },
+  "rules": [
+    {
+      "rule_id": "PY03-EVV",
+      "kind": "evv_required",
+      "denial_code": "D01",
+      "params": {},
+      "source": {"type": "document", "ref": "PY03_summit_provider_manual.md 9.1",
+                 "quote": "Summit requires a verified EVV record for each billed date of service, member and service"}
+    },
+    {
+      "rule_id": "PY03-UNITS",
+      "kind": "units_within_verified_time",
+      "denial_code": "D09",
+      "params": {"rounding": "whole_units_only"},
+      "source": {"type": "document", "ref": "PY03_summit_provider_manual.md 9.1",
+                 "quote": "partial units are not billable, and units above verified time will be denied"}
+    },
+    {
+      "rule_id": "PY03-AUTH-REQUIRED",
+      "kind": "auth_required",
+      "denial_code": "D07",
+      "params": {},
+      "source": {"type": "document", "ref": "PY03_summit_provider_manual.md 9.2",
+                 "quote": "A Summit authorization number is mandatory on every claim"}
+    },
+    {
+      "rule_id": "PY03-AUTH-MATCH",
+      "kind": "auth_matches",
+      "denial_code": "D08",
+      "params": {},
+      "source": {"type": "document", "ref": "PY03_summit_provider_manual.md 9.2",
+                 "quote": "The authorization must be for the member and service billed and cover the date of service"}
+    },
+    {
+      "rule_id": "PY03-AUTH-BALANCE",
+      "kind": "auth_balance",
+      "denial_code": "D02",
+      "params": {},
+      "source": {"type": "document", "ref": "PY03_summit_provider_manual.md 9.2",
+                 "quote": "claims exceeding the balance will be denied"}
+    },
+    {
+      "rule_id": "PY03-TIMELY-60",
+      "kind": "timely_filing",
+      "denial_code": "D03",
+      "params": {"days": 60},
+      "source": {"type": "document", "ref": "PY03_summit_provider_manual.md 9.3",
+                 "quote": "Claims must be received within 60 calendar days of the date of service"}
+    },
+    {
+      "rule_id": "PY03-DUPLICATE",
+      "kind": "no_duplicates",
+      "denial_code": "D05",
+      "params": {},
+      "source": {"type": "document", "ref": "PY03_summit_provider_manual.md 9.4",
+                 "quote": "Duplicate submissions are denied"}
+    },
+    {
+      "rule_id": "PY03-WHOLE-HOURS",
+      "kind": "whole_hours",
+      "denial_code": "D10",
+      "params": {"units_per_hour": 4},
+      "effective": {"basis": "date_of_service", "from": "2026-07-01"},
+      "source": {"type": "learned_from_history",
+                 "ref": "PY03_summit_provider_manual.md 9.5 (contract terms not published) + payer remarks 'Contract amendment 3: services must be billed in whole hours'",
+                 "quote": "Units not billable per amendment 3 (hourly increments)",
+                 "evidence": "Summit claims for a number of units that is not a multiple of 4: every one with a date of service up to 2026-06-30 that broke no other rule was paid; every one from 2026-07-01 was denied (D10, or D99 with the same remark). The cut-off follows the date of service, not the submission date: a June claim submitted on 2026-08-19 was paid."}
+    }
+  ],
+  "not_applied": [
+    {"topic": "modifier", "note": "No Summit document mentions modifiers, and history has no Summit D04."},
+    {"topic": "daily_unit_max", "note": "No Summit document mentions a daily maximum, and history has no Summit D06."}
+  ]
+}

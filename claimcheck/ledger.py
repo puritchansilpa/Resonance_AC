@@ -197,7 +197,8 @@ class Ledger:
 
 
 def simulate(history: Iterable[Claim], to_check: Iterable[Claim],
-             authorizations: Mapping[str, Authorization], decide) -> tuple[Ledger, dict[str, LedgerView]]:
+             authorizations: Mapping[str, Authorization], decide,
+             observe=None) -> tuple[Ledger, dict[str, LedgerView]]:
     """Run history and claims-to-check through one ledger, in submission order.
 
     History claims are recorded with their real outcome. For each claim-to-check,
@@ -206,6 +207,10 @@ def simulate(history: Iterable[Claim], to_check: Iterable[Claim],
     must be one stream: a claim-to-check submitted in August must see history
     claims from July, and history claims from September already reflect it.
 
+    If `observe(claim, view)` is given, it is called for each history claim
+    before its real outcome is recorded (used by the backtest to judge history
+    claims on exactly the state the payer saw).
+
     Returns the ledger (with its audit trail) and the view each claim-to-check
     was judged on.
     """
@@ -213,6 +218,8 @@ def simulate(history: Iterable[Claim], to_check: Iterable[Claim],
     views: dict[str, LedgerView] = {}
     for claim in in_stream_order(list(history) + list(to_check)):
         if claim.dataset == "history":
+            if observe is not None:
+                observe(claim, ledger.view(claim))
             ledger.record(claim, PAID if claim.status == PAID else DENIED, ACTUAL)
         else:
             view = ledger.view(claim)

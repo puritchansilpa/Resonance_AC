@@ -11,16 +11,60 @@ logged), and **repeatable** (same input gives byte-identical output; no model ca
 |---|---|
 | Data pipeline (`claimcheck/clean.py`) | built and tested |
 | Ledger engine (`claimcheck/ledger.py`) | built, validated against history |
-| Rule set, evidence checker, claim checker, fixer | not started |
+| Rule set (`rules/*.json`, `claimcheck/ruleset.py`) | hand-written baseline, versioned |
+| Evidence checker (`claimcheck/evidence.py`) | built |
+| Claim checker (`claimcheck/checker.py`) | built, backtested |
+| Precedence learner (`claimcheck/precedence.py`) | built (code order only) |
+| Fixer, review flags, model-based rule extraction, interface | not started |
 
 ## How to run
 
 ```powershell
 python -m pip install -r requirements.txt
-python -m claimcheck.clean     # Data/*.csv -> output/clean/
-python -m claimcheck.replay    # history through the ledger -> output/ledger/
+python -m claimcheck.clean        # Data/*.csv -> output/clean/
+python -m claimcheck.replay       # history through the ledger -> output/ledger/
+python -m claimcheck.precedence   # code order evidence -> rules/precedence_evidence.json
+python -m claimcheck.predict      # predictions + backtest -> output/
 python -m pytest -q
 ```
+
+## Results (rule set `904df479f483`)
+
+Backtest on 3,830 history claims, each judged on the ledger state the payer saw at the time:
+
+| | |
+|---|---|
+| Paid vs denied correct | 98.4% |
+| Exact code correct | 98.1% |
+| Exact code correct, excluding D99s that give no reason | 99.7% |
+
+All 74 misses fall into named categories:
+- **61 opaque D99s.** Remark "Denied - contact payer" or "Under review"; these claims break no rule, so nothing can predict them (about 1.6% of claims).
+- **12 D99s whose remark is the Summit whole-hours rule.** The engine predicts D10, which matches the payer's own remark.
+- **1 miss inherited from a claim-to-check.** C012372 was paid, but a claim-to-check on the same authorization was predicted paid. Had it really been paid, C012372 couldn't have been. It was most likely one of the opaque D99s.
+
+**Time split.** The code order and the Summit cut-off were learned from all of history. Learning them only from claims submitted before 1 September gives the same answers: no later claim contradicts the early pairs, and the early data alone puts the Summit cut-off at 1 July.
+
+`output/predictions.csv` has the 546 predictions. `output/decisions/to_check.jsonl` has, for each claim, every rule result (passed and failed), the evidence (visit IDs, minutes, authorization checks, ledger balances and which claims used them) and the rule-set version.
+
+## Rule set
+
+One JSON file per payer in `rules/`. Each rule names a rule type from `claimcheck/rule_kinds.py`, its
+parameters, the denial code, optional effective dates (by date of service), and its source: a
+document section with a quote, or `learned_from_history` with the evidence. Rules a payer
+does *not* apply are recorded too (`not_applied`), for example Harbor's lack of a filing limit. The
+rule set is schema-checked on load, and its SHA-256 fingerprint is stamped on every prediction.
+
+Two facts come from history, not documents:
+- **Summit whole hours (D10)** from 1 July 2026 by date of service (contract amendment 3, named
+  only in payer remarks).
+- **The order of codes each payer reports** when several rules fail. No pair is ever seen both ways:
+
+| Payer | Order |
+|---|---|
+| Northwind | D01 > D09 > D07 > D08 > D02 > D03 > D05 |
+| Harbor | D01 > D09 > D07 > D08 > D04 > D05 > D06 > D02 |
+| Summit | D01 > D07 > D08 > D10 > D09 > D02 > D03 > D05 |
 
 ## Data pipeline
 
@@ -69,5 +113,9 @@ claims-to-check submitted earlier on the same authorization.
 3. **Authorizations are not topped up.** Each patient, payer and service has one authorization for
    June–August and one for September–November; unused units don't carry over.
 4. **Payers pay whole claims or deny them.** Every paid history claim was paid its full billed amount.
-5. **Harbor's daily cap of 32 units** is hand-copied into `replay.py` for validation until the
-   versioned rule set exists.
+5. **Harbor's daily cap of 32 units** is hand-copied into `replay.py`, which checks the ledger without
+   the rule engine. The engine reads it from `rules/PY02.json`.
+6. **Code pairs never seen together in history are placed by analogy**, for example Summit D05 versus
+   D02/D03. `rules/precedence_evidence.json` lists every unobserved pair.
+7. **Claims-to-check are predicted without hindsight.** Later history claims sometimes reveal whether
+   an earlier claim-to-check was paid (C012372 above). The engine does not use this.
