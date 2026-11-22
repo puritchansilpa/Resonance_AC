@@ -57,7 +57,8 @@ def test_predictions_are_byte_identical_between_runs(clean_dir, tmp_path):
     predict.run(out, tmp_path / "a")
     predict.run(out, tmp_path / "b")
     for name in ["predictions.csv", "predictions_meta.json", "decisions/to_check.jsonl",
-                 "backtest/history_decisions.csv", "backtest/summary.json"]:
+                 "backtest/history_decisions.csv", "backtest/summary.json",
+                 "review/claims_to_check.csv", "review/summary.json"]:
         assert (tmp_path / "a" / name).read_bytes() == (tmp_path / "b" / name).read_bytes(), name
     lines = (tmp_path / "a" / "predictions.csv").read_text().splitlines()
     assert lines[0] == "claim_id,status,denial_code" and len(lines) == 547

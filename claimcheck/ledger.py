@@ -118,8 +118,16 @@ class Ledger:
         self._day_draws: dict[tuple, list[Draw]] = defaultdict(list)
         self._submissions: dict[tuple, list[str]] = defaultdict(list)
         self._last_key: tuple | None = None
-        self._recorded: set[str] = set()
+        self._outcomes: dict[str, LedgerEntry] = {}
         self.entries: list[LedgerEntry] = []
+
+    @property
+    def authorizations(self) -> Mapping[str, Authorization]:
+        return self._auths
+
+    def outcome_of(self, claim_id: str) -> LedgerEntry | None:
+        """The recorded outcome of an earlier claim (actual or predicted), if any."""
+        return self._outcomes.get(claim_id)
 
     # ------------------------------------------------------------------ reads
     @staticmethod
@@ -157,7 +165,7 @@ class Ledger:
             raise LedgerError(f"{claim.claim_id}: outcome must be paid or denied, got {outcome!r}")
         if source not in (ACTUAL, PREDICTED):
             raise LedgerError(f"{claim.claim_id}: source must be actual or predicted, got {source!r}")
-        if claim.claim_id in self._recorded:
+        if claim.claim_id in self._outcomes:
             raise LedgerError(f"{claim.claim_id} recorded twice")
         key = stream_key(claim)
         if self._last_key is not None and key < self._last_key:
@@ -191,14 +199,14 @@ class Ledger:
             prior_submissions=before.prior_submissions,
         )
         self.entries.append(entry)
-        self._recorded.add(claim.claim_id)
+        self._outcomes[claim.claim_id] = entry
         self._last_key = key
         return entry
 
 
 def simulate(history: Iterable[Claim], to_check: Iterable[Claim],
              authorizations: Mapping[str, Authorization], decide,
-             observe=None) -> tuple[Ledger, dict[str, LedgerView]]:
+             observe=None, ledger: Ledger | None = None) -> tuple[Ledger, dict[str, LedgerView]]:
     """Run history and claims-to-check through one ledger, in submission order.
 
     History claims are recorded with their real outcome. For each claim-to-check,
@@ -211,10 +219,15 @@ def simulate(history: Iterable[Claim], to_check: Iterable[Claim],
     before its real outcome is recorded (used by the backtest to judge history
     claims on exactly the state the payer saw).
 
+    Pass an empty `ledger` to keep a handle on it while the stream runs (the
+    fixer uses it to re-check an edited claim against the same state).
+
     Returns the ledger (with its audit trail) and the view each claim-to-check
     was judged on.
     """
-    ledger = Ledger(authorizations)
+    ledger = ledger if ledger is not None else Ledger(authorizations)
+    if ledger.entries:
+        raise LedgerError("simulate needs an empty ledger")
     views: dict[str, LedgerView] = {}
     for claim in in_stream_order(list(history) + list(to_check)):
         if claim.dataset == "history":
@@ -224,5 +237,10 @@ def simulate(history: Iterable[Claim], to_check: Iterable[Claim],
         else:
             view = ledger.view(claim)
             views[claim.claim_id] = view
-            ledger.record(claim, decide(claim, view), PREDICTED)
+            result = decide(claim, view)
+            # decide may return (edited_claim, outcome) to record a fixed version of the claim.
+            recorded, outcome = result if isinstance(result, tuple) else (claim, result)
+            if recorded.claim_id != claim.claim_id or stream_key(recorded) != stream_key(claim):
+                raise LedgerError(f"{claim.claim_id}: an edited claim must keep its ID and submission date")
+            ledger.record(recorded, outcome, PREDICTED)
     return ledger, views

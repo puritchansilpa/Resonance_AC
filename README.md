@@ -15,7 +15,9 @@ logged), and **repeatable** (same input gives byte-identical output; no model ca
 | Evidence checker (`claimcheck/evidence.py`) | built |
 | Claim checker (`claimcheck/checker.py`) | built, backtested |
 | Precedence learner (`claimcheck/precedence.py`) | built (code order only) |
-| Fixer, review flags, model-based rule extraction, interface | not started |
+| Fixer (`claimcheck/fixer.py`) | built |
+| Manual-review flags (`claimcheck/review.py`) | built |
+| Model-based rule extraction, interface | not started |
 
 ## How to run
 
@@ -46,6 +48,49 @@ All 74 misses fall into named categories:
 **Time split.** The code order and the Summit cut-off were learned from all of history. Learning them only from claims submitted before 1 September gives the same answers: no later claim contradicts the early pairs, and the early data alone puts the Summit cut-off at 1 July.
 
 `output/predictions.csv` has the 546 predictions. `output/decisions/to_check.jsonl` has, for each claim, every rule result (passed and failed), the evidence (visit IDs, minutes, authorization checks, ledger balances and which claims used them) and the rule-set version.
+
+## Fixer
+
+For each predicted denial, the fixer applies the edit for each failed rule. It then re-runs the
+whole checker on the edited claim against the same ledger state, and repeats until the claim passes
+or nothing more can change. Re-checking matters: cutting units for D09 can expose Summit's
+whole-hours rule (D10), and attaching the right authorization brings in that authorization's balance (D02).
+
+| Edit type | Example | Who decides |
+|---|---|---|
+| correction | modifier U2 → U3; attach the authorization on file; resubmit a duplicate of a *denied* claim as a corrected claim (frequency 7) | safe to apply |
+| required reduction | cut units to verified time (D09) or whole hours (D10) | safe to apply: billing what the evidence supports |
+| business choice | cut units to the authorization balance (D02) or daily cap (D06) | a person: the alternative is asking the payer for more units |
+
+Some denials can't be fixed by editing the claim: late filing (D03), no verified visit (D01; a
+visit at `manual_edit_pending` means "hold until verified"), no authorization on file, or a
+duplicate of a paid claim (D05).
+
+A second run applies every fix and replays the stream. A fix can change *other* claims: once a fixed
+claim gets paid, it draws units another claim was counting on. These ripples are flagged.
+
+**Claims-to-check (546):** 377 predicted paid as submitted, 48 fixable, 32 need a decision, 89 not
+fixable. $36,278 of $54,065 is predicted paid as submitted. Safe fixes add $4,050, and fixes
+needing a decision add $3,193.
+
+## Manual-review flags
+
+Named, deterministic reasons a prediction rests on an assumption, each marked `status_may_change`
+or `code_may_change`. 71 claims are flagged:
+
+| Flag | Claims | Meaning |
+|---|---|---|
+| DEPENDS_ON_PREDICTED | 24 | a D02/D06 caused by units drawn by other claims-to-check, whose outcomes are predictions |
+| LEARNED_RULE | 17 | reported code comes from a rule learned from history (Summit D10; Summit sometimes reports it as D99) |
+| CORRECTED_CLAIM | 14 | frequency 7: no corrected claims in history to confirm payer handling |
+| PENDING_EVV | 4 | a visit that day is awaiting aggregator approval |
+| UNOBSERVED_PRECEDENCE | 2 | several codes fail and history never showed their order, even through a chain |
+| FIX_RIPPLE | 2 | fixing earlier claims changes this claim's outcome |
+| ORDER_ASSUMPTION | 0 | a same-day claim shares state and swapping the order would change the outcome (checked; none does) |
+
+`output/review/claims_to_check.csv` has one row per claim: prediction, reason, fix, amount after
+fix, and flags. `output/decisions/to_check.jsonl` carries the full fix plan (each edit, its type
+and reason, how many re-check rounds it took) and the flags.
 
 ## Rule set
 
