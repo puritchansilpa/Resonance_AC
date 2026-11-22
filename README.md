@@ -17,7 +17,8 @@ logged), and **repeatable** (same input gives byte-identical output; no model ca
 | Precedence learner (`claimcheck/precedence.py`) | built (code order only) |
 | Fixer (`claimcheck/fixer.py`) | built |
 | Manual-review flags (`claimcheck/review.py`) | built |
-| Model-based rule extraction, interface | not started |
+| Rule extractor (`claimcheck/extract.py`) | built, run against Claude, evaluated |
+| Interface | not started |
 
 ## How to run
 
@@ -30,7 +31,16 @@ python -m claimcheck.predict      # predictions + backtest -> output/
 python -m pytest -q
 ```
 
-## Results (rule set `904df479f483`)
+The rule extractor needs an Anthropic API key (it is never needed for predictions):
+
+```powershell
+$env:ANTHROPIC_API_KEY = "<your key>"
+python -m claimcheck.extract evaluate              # draft all 3 payers, compare, backtest
+python -m claimcheck.extract run PY03              # draft one payer -> rules/proposed/
+python -m claimcheck.extract approve PY03 --by "Name" --note "why the draft was changed"
+```
+
+## Results (rule set `d03a749180dc`)
 
 Backtest on 3,830 history claims, each judged on the ledger state the payer saw at the time:
 
@@ -91,6 +101,53 @@ or `code_may_change`. 71 claims are flagged:
 `output/review/claims_to_check.csv` has one row per claim: prediction, reason, fix, amount after
 fix, and flags. `output/decisions/to_check.jsonl` carries the full fix plan (each edit, its type
 and reason, how many re-check rounds it took) and the flags.
+
+## Rule extractor: where the AI is
+
+Claude (`claude-opus-5-5`) is used in one place: drafting a payer's rule file from its manual and
+bulletins. It is never in the path of a claim decision. Adding a payer means drafting their file,
+reviewing it and approving it; the engine then runs it deterministically.
+
+1. **Draft** (`extract run`). The prompt lists the engine's rule types and the denial codes, and
+   includes one worked example: a *different* payer's documents and its approved rule file. The
+   response must match the rule template's JSON schema (structured output).
+2. **Check.** The draft passes the same validation as a hand-written file. Every rule must quote its
+   document word for word, and each quote is checked against the source text. Requirements the
+   documents mention but don't state (Summit 9.5, "additional billing requirements may apply") go to
+   `open_questions`, never into a rule.
+3. **Review and approve** (`extract approve`). A person edits the proposal in `rules/proposed/` if
+   needed, then approves it. Approval keeps the rules learned from history (Summit whole hours) and the
+   learned code order, records who approved it and which extraction it came from, and writes every
+   difference between the model's draft and the approved file to `rules/extraction_corrections.jsonl`.
+4. **Learn from corrections.** Logged corrections are included as lessons in later extraction prompts.
+   This is in-context learning from reviewed examples, not fine-tuning.
+
+**Repeatability.** Each response is cached under the SHA-256 of the exact request (model, prompt,
+schema). Re-running uses the cache, so the same documents always give the same draft, and the cache
+lets anyone reproduce a draft without an API key. `--refresh` calls the model again.
+
+**Evaluation** (`extract evaluate`). Each payer is drafted leave-one-out, matched rule by rule against
+the hand-written approved file (by type, code, effective dates and parameters, not IDs), then the
+claims history is backtested on the drafted rules and compared with the approved rules.
+
+| Payer | Rules matching the approved file | Quotes verified | Open questions raised |
+|---|---|---|---|
+| Northwind | 8 / 8 | all | 0 |
+| Harbor | 10 / 10 | all | 2 |
+| Summit | 7 / 7 | all | 1 |
+
+The backtest on the drafted rules is identical to the approved rules (98.07% exact, 99.66% excluding
+opaque D99), and no claim-to-check prediction changes. The three drafts cost about 9.6k input and 7.3k
+output tokens (roughly $0.20). The open questions are worth reading in `rules/proposed/PY0x.meta.json`:
+- **Summit 9.5:** the contract terms aren't published, so a reviewer must get the contract. History
+  fills this gap with the learned whole-hours rule.
+- **Harbor filing:** the exemption covers *in-state* providers only. Are any agencies out of state?
+- **Harbor bulletin:** it says "from dates of service on 1 September", not "on or after". The draft
+  assumes "on or after", and asks a reviewer to confirm.
+
+Caveat: the approved files were also written with AI help (Claude Code), so 25/25 shows that two
+readings of the documents agree, not that they are right. The independent check is the backtest
+against what payers actually did.
 
 ## Rule set
 

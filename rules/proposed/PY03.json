@@ -1,0 +1,108 @@
+{
+  "payer_id": "PY03",
+  "payer_name": "Summit Care Partners",
+  "denial_precedence": [
+    "D01",
+    "D07",
+    "D08",
+    "D10",
+    "D09",
+    "D02",
+    "D03",
+    "D05"
+  ],
+  "precedence_source": {
+    "type": "learned_from_history",
+    "note": "Copied from the approved rule file; the extractor does not set code order."
+  },
+  "rules": [
+    {
+      "rule_id": "PY03-EVV",
+      "kind": "evv_required",
+      "denial_code": "D01",
+      "params": {},
+      "source": {
+        "type": "document",
+        "ref": "PY03_summit_provider_manual.md Section 9: Claims for in-home services, 9.1",
+        "quote": "Summit requires a verified EVV record for each billed date of service, member and service."
+      }
+    },
+    {
+      "rule_id": "PY03-UNITS",
+      "kind": "units_within_verified_time",
+      "denial_code": "D09",
+      "params": {
+        "rounding": "whole_units_only"
+      },
+      "source": {
+        "type": "document",
+        "ref": "PY03_summit_provider_manual.md Section 9: Claims for in-home services, 9.1",
+        "quote": "Bill in 15-minute units of verified time; partial units are not billable, and units above verified time will be denied."
+      }
+    },
+    {
+      "rule_id": "PY03-AUTH-REQUIRED",
+      "kind": "auth_required",
+      "denial_code": "D07",
+      "params": {},
+      "source": {
+        "type": "document",
+        "ref": "PY03_summit_provider_manual.md Section 9: Claims for in-home services, 9.2",
+        "quote": "A Summit authorization number is mandatory on every claim."
+      }
+    },
+    {
+      "rule_id": "PY03-AUTH-MATCH",
+      "kind": "auth_matches",
+      "denial_code": "D08",
+      "params": {},
+      "source": {
+        "type": "document",
+        "ref": "PY03_summit_provider_manual.md Section 9: Claims for in-home services, 9.2",
+        "quote": "The authorization must be for the member and service billed and cover the date of service."
+      }
+    },
+    {
+      "rule_id": "PY03-AUTH-BALANCE",
+      "kind": "auth_balance",
+      "denial_code": "D02",
+      "params": {},
+      "source": {
+        "type": "document",
+        "ref": "PY03_summit_provider_manual.md Section 9: Claims for in-home services, 9.2",
+        "quote": "Paid units are deducted from the authorization; claims exceeding the balance will be denied."
+      }
+    },
+    {
+      "rule_id": "PY03-TIMELY-60",
+      "kind": "timely_filing",
+      "denial_code": "D03",
+      "params": {
+        "days": 60
+      },
+      "source": {
+        "type": "document",
+        "ref": "PY03_summit_provider_manual.md Section 9: Claims for in-home services, 9.3",
+        "quote": "Claims must be received within 60 calendar days of the date of service."
+      }
+    },
+    {
+      "rule_id": "PY03-DUPLICATE",
+      "kind": "no_duplicates",
+      "denial_code": "D05",
+      "params": {},
+      "source": {
+        "type": "document",
+        "ref": "PY03_summit_provider_manual.md Section 9: Claims for in-home services, 9.4",
+        "quote": "Duplicate submissions are denied."
+      }
+    }
+  ],
+  "not_applied": [],
+  "open_questions": [
+    {
+      "quote": "Additional billing requirements may apply under your agency's contract with Summit.",
+      "question": "The handbook refers to contract-specific billing requirements without stating them. A reviewer needs to obtain the agency's contract with Summit to identify any additional requirements (e.g., modifiers, daily maximums, or other contract-specific denials such as D10) before rules can be added."
+    }
+  ]
+}

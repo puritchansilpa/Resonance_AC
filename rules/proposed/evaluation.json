@@ -1,0 +1,177 @@
+{
+  "model": "claude-opus-5-5",
+  "payers": {
+    "PY01": {
+      "document_rules_in_approved_file": 8,
+      "matched": [
+        {
+          "approved": "PY01-EVV",
+          "proposed": "PY01-EVV"
+        },
+        {
+          "approved": "PY01-UNITS",
+          "proposed": "PY01-UNITS"
+        },
+        {
+          "approved": "PY01-AUTH-REQUIRED",
+          "proposed": "PY01-AUTH-REQUIRED"
+        },
+        {
+          "approved": "PY01-AUTH-MATCH",
+          "proposed": "PY01-AUTH-MATCH"
+        },
+        {
+          "approved": "PY01-AUTH-BALANCE",
+          "proposed": "PY01-AUTH-BALANCE"
+        },
+        {
+          "approved": "PY01-TIMELY-30",
+          "proposed": "PY01-TIMELY-30"
+        },
+        {
+          "approved": "PY01-TIMELY-45",
+          "proposed": "PY01-TIMELY-45"
+        },
+        {
+          "approved": "PY01-DUPLICATE",
+          "proposed": "PY01-DUPLICATE"
+        }
+      ],
+      "parameter_differences": [],
+      "missing_from_proposal": [],
+      "extra_in_proposal": [],
+      "learned_rules_not_expected_from_documents": [],
+      "not_applied_missing": [],
+      "open_questions": [],
+      "exact_match_rate": 1.0,
+      "valid": true,
+      "validation_error": "",
+      "unverified_quotes": []
+    },
+    "PY02": {
+      "document_rules_in_approved_file": 10,
+      "matched": [
+        {
+          "approved": "PY02-EVV",
+          "proposed": "PY02-EVV"
+        },
+        {
+          "approved": "PY02-UNITS",
+          "proposed": "PY02-UNITS"
+        },
+        {
+          "approved": "PY02-AUTH-REQUIRED",
+          "proposed": "PY02-AUTH-REQUIRED"
+        },
+        {
+          "approved": "PY02-AUTH-MATCH",
+          "proposed": "PY02-AUTH-MATCH"
+        },
+        {
+          "approved": "PY02-AUTH-BALANCE",
+          "proposed": "PY02-AUTH-BALANCE"
+        },
+        {
+          "approved": "PY02-MOD-U2",
+          "proposed": "PY02-MOD-T1019-U2"
+        },
+        {
+          "approved": "PY02-MOD-U2-WEEKDAY",
+          "proposed": "PY02-MOD-T1019-U2-WEEKDAY"
+        },
+        {
+          "approved": "PY02-MOD-U3-WEEKEND",
+          "proposed": "PY02-MOD-T1019-U3-WEEKEND"
+        },
+        {
+          "approved": "PY02-DAILY-MAX",
+          "proposed": "PY02-DAILY-MAX-32"
+        },
+        {
+          "approved": "PY02-DUPLICATE",
+          "proposed": "PY02-DUPLICATE"
+        }
+      ],
+      "parameter_differences": [],
+      "missing_from_proposal": [],
+      "extra_in_proposal": [],
+      "learned_rules_not_expected_from_documents": [],
+      "not_applied_missing": [],
+      "open_questions": [
+        {
+          "quote": "Harbor does not apply a timely filing limit to in-state HCBS providers.",
+          "question": "The exemption is limited to in-state HCBS providers, and no filing limit is stated for out-of-state providers. The reviewer should confirm whether any of our providers are out-of-state and, if so, what limit applies. No timely_filing rule was created."
+        },
+        {
+          "quote": "from dates of service on 1 September 2026",
+          "question": "The bulletin says 'on 1 September 2026', not 'on or after'. The rules assume the weekend U3 / weekday U2 split applies to all dates of service from 2026-09-01 onward, and the reviewer should confirm this."
+        }
+      ],
+      "exact_match_rate": 1.0,
+      "valid": true,
+      "validation_error": "",
+      "unverified_quotes": []
+    },
+    "PY03": {
+      "document_rules_in_approved_file": 7,
+      "matched": [
+        {
+          "approved": "PY03-EVV",
+          "proposed": "PY03-EVV"
+        },
+        {
+          "approved": "PY03-UNITS",
+          "proposed": "PY03-UNITS"
+        },
+        {
+          "approved": "PY03-AUTH-REQUIRED",
+          "proposed": "PY03-AUTH-REQUIRED"
+        },
+        {
+          "approved": "PY03-AUTH-MATCH",
+          "proposed": "PY03-AUTH-MATCH"
+        },
+        {
+          "approved": "PY03-AUTH-BALANCE",
+          "proposed": "PY03-AUTH-BALANCE"
+        },
+        {
+          "approved": "PY03-TIMELY-60",
+          "proposed": "PY03-TIMELY-60"
+        },
+        {
+          "approved": "PY03-DUPLICATE",
+          "proposed": "PY03-DUPLICATE"
+        }
+      ],
+      "parameter_differences": [],
+      "missing_from_proposal": [],
+      "extra_in_proposal": [],
+      "learned_rules_not_expected_from_documents": [
+        "PY03-WHOLE-HOURS"
+      ],
+      "not_applied_missing": [],
+      "open_questions": [
+        {
+          "quote": "Additional billing requirements may apply under your agency's contract with Summit.",
+          "question": "The handbook refers to contract-specific billing requirements without stating them. A reviewer needs to obtain the agency's contract with Summit to identify any additional requirements (e.g., modifiers, daily maximums, or other contract-specific denials such as D10) before rules can be added."
+        }
+      ],
+      "exact_match_rate": 1.0,
+      "valid": true,
+      "validation_error": "",
+      "unverified_quotes": []
+    }
+  },
+  "backtest": {
+    "approved_rules": {
+      "exact_code_accuracy": 0.9807,
+      "exact_code_accuracy_excluding_opaque_d99": 0.9966
+    },
+    "extracted_rules": {
+      "exact_code_accuracy": 0.9807,
+      "exact_code_accuracy_excluding_opaque_d99": 0.9966
+    },
+    "claims_to_check_with_a_different_prediction": []
+  }
+}

@@ -153,20 +153,43 @@ class RuleKind:
     check: Callable[[Claim, Evidence, dict], Outcome]
     params: dict[str, type]           # required parameter -> type
     optional: dict[str, type] = field(default_factory=dict)
+    description: str = ""             # plain English, shown to the rule extractor
 
 
 RULE_KINDS: dict[str, RuleKind] = {
-    "evv_required": RuleKind(_evv_required, {}),
-    "units_within_verified_time": RuleKind(_units_within_verified_time, {"rounding": str}),
-    "auth_required": RuleKind(_auth_required, {}),
-    "auth_matches": RuleKind(_auth_matches, {}),
-    "auth_balance": RuleKind(_auth_balance, {}),
-    "timely_filing": RuleKind(_timely_filing, {"days": int}),
-    "modifier_required": RuleKind(_modifier_required, {"service_codes": list, "modifier": str},
-                                  {"days_of_week": list}),
-    "daily_unit_max": RuleKind(_daily_unit_max, {"max_units": int}),
-    "no_duplicates": RuleKind(_no_duplicates, {}),
-    "whole_hours": RuleKind(_whole_hours, {"units_per_hour": int}),
+    "evv_required": RuleKind(
+        _evv_required, {},
+        description="A verified EVV visit must exist for the member, service and date of service."),
+    "units_within_verified_time": RuleKind(
+        _units_within_verified_time, {"rounding": str},
+        description="Billed units may not exceed the verified visit time converted to 15-minute units. "
+                    "rounding: 'whole_units_only' (only complete 15-minute units count) or "
+                    "'eight_minute_rule' (a remainder of 8+ minutes counts as one more unit)."),
+    "auth_required": RuleKind(
+        _auth_required, {},
+        description="The claim must carry a prior authorization number."),
+    "auth_matches": RuleKind(
+        _auth_matches, {},
+        description="The authorization must be for this member, payer and service and cover the date of service."),
+    "auth_balance": RuleKind(
+        _auth_balance, {},
+        description="Billed units may not exceed the units remaining on the authorization."),
+    "timely_filing": RuleKind(
+        _timely_filing, {"days": int},
+        description="The claim must be received within `days` calendar days of the date of service."),
+    "modifier_required": RuleKind(
+        _modifier_required, {"service_codes": list, "modifier": str}, {"days_of_week": list},
+        description="Claims for the listed service codes must carry `modifier`. Optional days_of_week "
+                    "(Mon..Sun) limits the rule to care delivered on those days."),
+    "daily_unit_max": RuleKind(
+        _daily_unit_max, {"max_units": int},
+        description="A member's paid units per day, across all services with this payer, may not exceed max_units."),
+    "no_duplicates": RuleKind(
+        _no_duplicates, {},
+        description="A new claim repeating an earlier submission (same member, service, date, payer) is denied."),
+    "whole_hours": RuleKind(
+        _whole_hours, {"units_per_hour": int},
+        description="Units must be a whole number of hours (a multiple of units_per_hour)."),
 }
 
 ROUNDINGS = {"whole_units_only", "eight_minute_rule"}

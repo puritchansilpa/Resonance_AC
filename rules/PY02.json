@@ -92,6 +92,7 @@
     }
   ],
   "not_applied": [
-    {"topic": "timely_filing", "note": "Harbor does not apply a timely filing limit to in-state HCBS providers (manual, Filing limits). History has no Harbor D03, with filing lags up to 110 days."}
+    {"topic": "timely_filing", "note": "Harbor does not apply a timely filing limit to in-state HCBS providers (manual, Filing limits). History has no Harbor D03, with filing lags up to 110 days.",
+     "quote": "Harbor does not apply a timely filing limit to in-state HCBS providers"}
   ]
 }

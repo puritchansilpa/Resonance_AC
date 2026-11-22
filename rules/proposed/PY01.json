@@ -1,0 +1,123 @@
+{
+  "payer_id": "PY01",
+  "payer_name": "Northwind Health Plan",
+  "denial_precedence": [
+    "D01",
+    "D09",
+    "D07",
+    "D08",
+    "D02",
+    "D03",
+    "D05"
+  ],
+  "precedence_source": {
+    "type": "learned_from_history",
+    "note": "Copied from the approved rule file; the extractor does not set code order."
+  },
+  "rules": [
+    {
+      "rule_id": "PY01-EVV",
+      "kind": "evv_required",
+      "denial_code": "D01",
+      "params": {},
+      "source": {
+        "type": "document",
+        "ref": "PY01_northwind_provider_manual.md 4.2 Electronic Visit Verification",
+        "quote": "All personal care (T1019), respite (T1005) and attendant care (S5125) services must be supported by a verified EVV record for the member, service and date of service."
+      }
+    },
+    {
+      "rule_id": "PY01-UNITS",
+      "kind": "units_within_verified_time",
+      "denial_code": "D09",
+      "params": {
+        "rounding": "eight_minute_rule"
+      },
+      "source": {
+        "type": "document",
+        "ref": "PY01_northwind_provider_manual.md 4.3 Units of service",
+        "quote": "Northwind follows the 8-minute rule: after the last full 15-minute unit, a remaining 8 minutes or more may be billed as one further unit; 7 minutes or fewer may not."
+      }
+    },
+    {
+      "rule_id": "PY01-AUTH-REQUIRED",
+      "kind": "auth_required",
+      "denial_code": "D07",
+      "params": {},
+      "source": {
+        "type": "document",
+        "ref": "PY01_northwind_provider_manual.md 4.5 Prior authorization",
+        "quote": "Every claim must carry the Northwind prior authorization number"
+      }
+    },
+    {
+      "rule_id": "PY01-AUTH-MATCH",
+      "kind": "auth_matches",
+      "denial_code": "D08",
+      "params": {},
+      "source": {
+        "type": "document",
+        "ref": "PY01_northwind_provider_manual.md 4.5 Prior authorization",
+        "quote": "prior authorization number covering the member, service and date of service"
+      }
+    },
+    {
+      "rule_id": "PY01-AUTH-BALANCE",
+      "kind": "auth_balance",
+      "denial_code": "D02",
+      "params": {},
+      "source": {
+        "type": "document",
+        "ref": "PY01_northwind_provider_manual.md 4.5 Prior authorization",
+        "quote": "Claims that exceed the units remaining on the authorization will be denied."
+      }
+    },
+    {
+      "rule_id": "PY01-TIMELY-30",
+      "kind": "timely_filing",
+      "denial_code": "D03",
+      "params": {
+        "days": 30
+      },
+      "source": {
+        "type": "document",
+        "ref": "PY01_northwind_provider_manual.md 6.1 Timely filing",
+        "quote": "Claims must be received within 30 calendar days of the date of service."
+      },
+      "effective": {
+        "basis": "date_of_service",
+        "to": "2026-07-31"
+      }
+    },
+    {
+      "rule_id": "PY01-TIMELY-45",
+      "kind": "timely_filing",
+      "denial_code": "D03",
+      "params": {
+        "days": 45
+      },
+      "source": {
+        "type": "document",
+        "ref": "PY01_northwind_bulletin_2026-07.md",
+        "quote": "For dates of service on or after 1 August 2026, claims must be received within 45 calendar days of the date of service."
+      },
+      "effective": {
+        "basis": "date_of_service",
+        "from": "2026-08-01"
+      }
+    },
+    {
+      "rule_id": "PY01-DUPLICATE",
+      "kind": "no_duplicates",
+      "denial_code": "D05",
+      "params": {},
+      "source": {
+        "type": "document",
+        "ref": "PY01_northwind_provider_manual.md 6.4 Duplicate claims",
+        "quote": "Northwind denies any claim that duplicates one already received."
+      }
+    }
+  ],
+  "not_applied": [],
+  "open_questions": []
+}
