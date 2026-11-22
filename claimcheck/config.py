@@ -39,6 +39,28 @@ PAYER_NAMES = {
     "PY03": "Summit Care Partners",
 }
 
+# Payers added after the data pack (python -m claimcheck.onboard add ...) are kept in a
+# registry with their names and the spellings their claims exports use.
+ONBOARDING_DIR = REPO_ROOT / "onboarding"
+PAYER_REGISTRY = ONBOARDING_DIR / "payers.json"
+ONBOARDED_DOCS_DIR = ONBOARDING_DIR / "payers"
+
+
+def load_registry(path=None) -> dict:
+    import json
+    path = path or PAYER_REGISTRY
+    return json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+
+
+def register_payer_names(registry: dict) -> None:
+    for pid, info in registry.items():
+        PAYER_NAMES[pid] = info["name"]
+        for alias in [pid, info["name"], *info.get("aliases", [])]:
+            PAYER_ALIASES[alias.strip().upper()] = pid
+
+
+register_payer_names(load_registry())
+
 SERVICE_CODES = {"T1019", "T1005", "S5125"}
 MODIFIERS = {"U1", "U2", "U3"}
 FREQUENCY_CODES = {1, 7}

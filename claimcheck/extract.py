@@ -82,10 +82,19 @@ class ExtractionError(LLMError):
 # --------------------------------------------------------------------------- #
 
 def payer_documents(payer_id: str, payers_dir: Path = PAYERS_DIR) -> list[tuple[str, str]]:
-    docs = [(p.name, p.read_text(encoding="utf-8")) for p in sorted(payers_dir.glob(f"{payer_id}_*.md"))]
-    if not docs:
-        raise ExtractionError(f"No documents for {payer_id} in {payers_dir}")
-    return docs
+    """The payer's documents: from the data pack, or for an onboarded payer from onboarding/payers/."""
+    dirs = [payers_dir] + ([config.ONBOARDED_DOCS_DIR] if payers_dir == PAYERS_DIR else [])
+    for d in dirs:
+        docs = [(p.name, p.read_text(encoding="utf-8")) for p in sorted(d.glob(f"{payer_id}_*.md"))]
+        if docs:
+            return docs
+    raise ExtractionError(f"No documents for {payer_id}; add them with python -m claimcheck.onboard add")
+
+
+def example_for(payer_id: str) -> str:
+    """The approved payer whose file is the worked example (never the payer being drafted).
+    New payers get Harbor's, the file with the widest mix of rule types."""
+    return EXAMPLE_FOR.get(payer_id, "PY02")
 
 
 def _nullable(schema: dict) -> dict:
@@ -203,7 +212,7 @@ def load_corrections(path: Path = CORRECTIONS_FILE) -> list[dict]:
 
 def build_request(payer_id: str, rules_dir: Path = RULES_DIR, payers_dir: Path = PAYERS_DIR,
                   corrections: list[dict] | None = None, model: str = MODEL) -> dict:
-    example_id = EXAMPLE_FOR[payer_id]
+    example_id = example_for(payer_id)
     example = json.loads((rules_dir / f"{example_id}.json").read_text(encoding="utf-8"))
     corrections = load_corrections() if corrections is None else corrections
     target = _documents_block(payer_id, payer_documents(payer_id, payers_dir))
@@ -283,6 +292,11 @@ def extract(payer_id: str, rules_dir: Path = RULES_DIR, out_dir: Path = PROPOSED
     approved = _approved(payer_id, rules_dir)
     precedence = approved["denial_precedence"] if approved else list(DENIAL_CODES)
     proposal = draft_to_rule_file(draft, payer_id, precedence)
+    if approved is None:
+        proposal["precedence_source"] = {
+            "type": "default",
+            "note": "New payer with no claims history yet: codes in numeric order until the precedence "
+                    "learner (python -m claimcheck.precedence) has its adjudicated claims."}
     try:
         _validate_payer(proposal)
         valid, error = True, ""
@@ -293,7 +307,7 @@ def extract(payer_id: str, rules_dir: Path = RULES_DIR, out_dir: Path = PROPOSED
         "model": result.get("model", model),
         "request_sha256": request_key(request),
         "from_cache": from_cache,
-        "worked_example": EXAMPLE_FOR[payer_id],
+        "worked_example": example_for(payer_id),
         "corrections_in_prompt": len(request["messages"][2]["content"].split("\n- ")) - 1
         if "Lessons from earlier drafts" in request["messages"][2]["content"] else 0,
         "valid": valid,

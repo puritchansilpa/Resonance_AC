@@ -15,6 +15,8 @@ Flags (all computed from the evidence and ledger, never from a model):
                           this payer reports first (not even through a chain: A over B, B over C)
   LEARNED_RULE            the reported code comes from a rule learned from history, not a document
   FIX_RIPPLE              set by predict: applying fixes to earlier claims changes this claim's outcome
+  CONTRADICTED_BY_HISTORY this claim is predicted paid, but a later real payer decision on the same
+                          authorization is only possible if it was not paid (see overdrawn_authorizations)
 """
 from __future__ import annotations
 
@@ -63,11 +65,52 @@ def load_observed_pairs(path: Path = RULES_DIR / "precedence_evidence.json") -> 
     return out
 
 
+def overdrawn_authorizations(ledger: Ledger) -> list[dict]:
+    """Authorizations the ledger pushes below zero.
+
+    History outcomes are facts and are recorded as the payer decided, so the
+    balance can go negative only when an earlier *predicted* draw was wrong: the
+    payer paid a later claim it couldn't have paid if the prediction were true.
+    Each error lists the full trace and the predictions it contradicts.
+    """
+    by_auth: dict[str, list] = defaultdict(list)
+    for e in ledger.entries:
+        if e.auth_id:
+            by_auth[e.auth_id].append(e)
+    errors = []
+    for auth_id, entries in sorted(by_auth.items()):
+        negative = [e for e in entries if e.auth_remaining_after is not None and e.auth_remaining_after < 0]
+        if not negative:
+            continue
+        first = negative[0]
+        auth = ledger.authorizations[auth_id]
+        used_actual = sum(e.units_drawn for e in entries if e.outcome_source == "actual")
+        errors.append({
+            "auth_id": auth_id,
+            "payer_id": auth.payer_id,
+            "patient_id": auth.patient_id,
+            "service_code": auth.service_code,
+            "units_authorized": auth.units_authorized,
+            "overdrawn_by": -min(e.auth_remaining_after for e in negative),
+            "used_by_paid_claims": used_actual,
+            "left_from_paid_claims_only": auth.units_authorized - used_actual,
+            "first_conflict_claim": first.claim_id,
+            "contradicted_predictions": [e.claim_id for e in entries if e.sequence < first.sequence
+                                         and e.outcome_source == "predicted" and e.units_drawn > 0],
+            "trace": [{"claim_id": e.claim_id, "dataset": e.dataset, "submitted_date": e.submitted_date.isoformat(),
+                       "outcome": e.outcome, "source": e.outcome_source, "units_drawn": e.units_drawn,
+                       "remaining_after": e.auth_remaining_after} for e in entries],
+        })
+    return errors
+
+
 class Reviewer:
     def __init__(self, ruleset: RuleSet, all_claims: list[Claim], ledger: Ledger, predicted_ids: set[str],
-                 observed_pairs: dict[str, set[tuple[str, str]]] | None = None):
+                 observed_pairs: dict[str, set[tuple[str, str]]] | None = None,
+                 ledger_errors: list[dict] | None = None):
         self.ruleset = ruleset
         self.ledger = ledger
+        self.contradicted = {cid: err for err in (ledger_errors or []) for cid in err["contradicted_predictions"]}
         self.predicted_ids = predicted_ids
         self.pairs = observed_pairs if observed_pairs is not None else load_observed_pairs()
         self.claims = {c.claim_id: c for c in all_claims}
@@ -133,6 +176,15 @@ class Reviewer:
             flags.append(Flag("PENDING_EVV", STATUS,
                               f"Visit {', '.join(pending)} is awaiting aggregator approval; once verified it "
                               f"counts as evidence and the outcome may change."))
+        if c.claim_id in self.contradicted:
+            err = self.contradicted[c.claim_id]
+            left = err["left_from_paid_claims_only"]
+            verdict = (f"With {c.units} units it would be denied D02." if c.units > left
+                       else "It still fits in what is left.")
+            flags.append(Flag("CONTRADICTED_BY_HISTORY", STATUS,
+                              f"Predicted paid, but {err['auth_id']} later paid {err['first_conflict_claim']}, which "
+                              f"is only possible if this claim did not draw its units. Counting only claims the "
+                              f"payer really paid, {left} of {err['units_authorized']} units are left. {verdict}"))
         if c.is_corrected:
             flags.append(Flag("CORRECTED_CLAIM", STATUS,
                               f"Corrected claim for {c.original_claim_id}. History has no corrected claims, so "

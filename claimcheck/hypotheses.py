@@ -114,11 +114,11 @@ def residual_groups(run) -> list[dict]:
 # Asking Claude
 # --------------------------------------------------------------------------- #
 
-def output_schema() -> dict:
+def output_schema(payer_ids: list[str]) -> dict:
     params = {name: nullable(s) for name, s in PARAM_SCHEMAS.items()}
     hypothesis = strict_object({
         "hypothesis_id": {"type": "string"},
-        "payer_id": {"type": "string", "enum": sorted(config.PAYER_NAMES)},
+        "payer_id": {"type": "string", "enum": sorted(payer_ids)},
         "denial_code": {"type": "string", "enum": ["D01", "D02", "D03", "D04", "D05", "D06", "D07",
                                                    "D08", "D09", "D10"]},
         "kind": {"type": "string", "enum": TESTABLE_KINDS},
@@ -160,7 +160,7 @@ Guidance:
 def build_request(groups: list[dict], ruleset, model: str = OPUS) -> dict:
     content = "Claims the engine got wrong, grouped:\n\n" + json.dumps(groups, indent=1)
     return make_request(model, "high", system_prompt(ruleset), [{"role": "user", "content": content}],
-                        output_schema())
+                        output_schema(list(ruleset.payers)))
 
 
 # --------------------------------------------------------------------------- #

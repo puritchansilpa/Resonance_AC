@@ -30,7 +30,7 @@ from .evidence import EvidenceBuilder, _jsonable
 from .fixer import FIXABLE, NEEDS_DECISION, FixPlan, Fixer
 from .ledger import PAID, Ledger, simulate
 from .models import Claim, load_authorizations, load_claims, load_visits
-from .review import STATUS, Flag, Reviewer, load_observed_pairs
+from .review import STATUS, Flag, Reviewer, load_observed_pairs, overdrawn_authorizations
 from .ruleset import RULES_DIR, load
 
 # Remarks on D99 denials that carry no rule information.
@@ -78,6 +78,7 @@ class Run:
     plans: dict[str, FixPlan]               # fix plan per claim-to-check, judged in isolation
     scenario_plans: dict[str, FixPlan]      # fix plans when every earlier fix is applied too
     ledger: Ledger
+    ledger_errors: list                     # authorizations the ledger overdraws (see review.py)
 
 
 def _fix_scenario(history, to_check, auths, checker, fixer) -> dict[str, FixPlan]:
@@ -125,8 +126,9 @@ def run_all(clean_dir: Path = config.CLEAN_DIR, rules_dir: Path = RULES_DIR) -> 
     simulate(history, to_check, auths, decide, observe, ledger=ledger)
     scenario = _fix_scenario(history, to_check, auths, checker, fixer)
 
+    ledger_errors = overdrawn_authorizations(ledger)
     reviewer = Reviewer(ruleset, history + to_check, ledger, set(check_dec),
-                        load_observed_pairs(rules_dir / "precedence_evidence.json"))
+                        load_observed_pairs(rules_dir / "precedence_evidence.json"), ledger_errors)
     for c in to_check:
         d = check_dec[c.claim_id]
         flags = list(reviewer.flags_for(c, d))
@@ -138,7 +140,7 @@ def run_all(clean_dir: Path = config.CLEAN_DIR, rules_dir: Path = RULES_DIR) -> 
                               f"'{alone.outcome}' ({alone.final_decision.denial_code or 'paid'}): "
                               f"{together.summary()}"))
         check_dec[c.claim_id] = replace(d, flags=tuple(flags))
-    return Run(ruleset, history, to_check, hist_dec, check_dec, plans, scenario, ledger)
+    return Run(ruleset, history, to_check, hist_dec, check_dec, plans, scenario, ledger, ledger_errors)
 
 
 def classify_miss(claim: Claim, d: Decision, predicted_ids: set[str]) -> str:
@@ -278,6 +280,8 @@ def run(clean_dir: Path = config.CLEAN_DIR, out_dir: Path = config.OUTPUT_DIR) -
     fixes = fix_summary(r)
     (out_dir / "review" / "summary.json").write_text(json.dumps(fixes, indent=2) + "\n",
                                                      encoding="utf-8", newline="\n")
+    (out_dir / "review" / "ledger_errors.json").write_text(json.dumps(r.ledger_errors, indent=2) + "\n",
+                                                           encoding="utf-8", newline="\n")
     return {"summary": summary, "meta": meta, "fixes": fixes}
 
 

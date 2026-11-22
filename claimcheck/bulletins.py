@@ -144,9 +144,8 @@ def unverified_quotes(delta: dict, bulletin_text: str) -> list[str]:
 
 
 def _example(payer_id: str, rules_dir: Path, payers_dir: Path):
-    ex = EXAMPLE_FOR.get(payer_id)
-    if not ex:
-        return None
+    # A newly onboarded payer gets Northwind's bulletin (a dated filing-limit change) as its example.
+    ex = EXAMPLE_FOR.get(payer_id, "PY01")
     approved = json.loads((rules_dir / f"{ex}.json").read_text(encoding="utf-8"))
     name = KNOWN_BULLETINS[ex]
     return (pre_bulletin_state(approved, name), name, (payers_dir / name).read_text(encoding="utf-8"),

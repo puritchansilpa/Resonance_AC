@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "claim-check",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "claimcheck.app", "--port", "8765"],
+      "port": 8765
+    }
+  ]
+}

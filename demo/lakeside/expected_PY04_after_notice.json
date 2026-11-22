@@ -1,0 +1,30 @@
+{
+  "payer_id": "PY04",
+  "payer_name": "Lakeside Community Health",
+  "_about": "Answer key after Provider Notice 2026-10: the 90-day limit ends on 2026-10-31 and a 60-day limit starts on 2026-11-01. The holiday modifier U4 is not a rule: there is no holiday list yet and U4 is not a modifier the engine knows. A good draft raises it as an open question.",
+  "denial_precedence": ["D01", "D02", "D03", "D04", "D05", "D06", "D07", "D08", "D09", "D10", "D99"],
+  "precedence_source": {"type": "default", "note": "No claims history yet."},
+  "rules": [
+    {"rule_id": "PY04-EVV", "kind": "evv_required", "denial_code": "D01", "params": {},
+     "source": {"type": "document", "ref": "PY04_lakeside_billing_manual.md 3.1", "quote": "must be supported by a verified EVV visit for the member, service and date of service"}},
+    {"rule_id": "PY04-UNITS", "kind": "units_within_verified_time", "denial_code": "D09", "params": {"rounding": "eight_minute_rule"},
+     "source": {"type": "document", "ref": "PY04_lakeside_billing_manual.md 3.2", "quote": "a remaining 8 minutes or more counts as one further unit"}},
+    {"rule_id": "PY04-AUTH-REQUIRED", "kind": "auth_required", "denial_code": "D07", "params": {},
+     "source": {"type": "document", "ref": "PY04_lakeside_billing_manual.md 4.1", "quote": "Each claim must carry the Lakeside authorization number for the member and service"}},
+    {"rule_id": "PY04-AUTH-MATCH", "kind": "auth_matches", "denial_code": "D08", "params": {},
+     "source": {"type": "document", "ref": "PY04_lakeside_billing_manual.md 4.1", "quote": "valid on the date of service"}},
+    {"rule_id": "PY04-AUTH-BALANCE", "kind": "auth_balance", "denial_code": "D02", "params": {},
+     "source": {"type": "document", "ref": "PY04_lakeside_billing_manual.md 4.2", "quote": "Claims that exceed the remaining balance are denied"}},
+    {"rule_id": "PY04-MOD-U1", "kind": "modifier_required", "denial_code": "D04", "params": {"service_codes": ["S5125"], "modifier": "U1"},
+     "source": {"type": "document", "ref": "PY04_lakeside_billing_manual.md 5.1", "quote": "Attendant care (S5125) must be billed with modifier U1"}},
+    {"rule_id": "PY04-TIMELY-90", "kind": "timely_filing", "denial_code": "D03", "params": {"days": 90},
+     "effective": {"basis": "date_of_service", "to": "2026-10-31"},
+     "source": {"type": "document", "ref": "PY04_lakeside_billing_manual.md 6.1", "quote": "Claims must be received within 90 calendar days of the date of service"}},
+    {"rule_id": "PY04-TIMELY-60", "kind": "timely_filing", "denial_code": "D03", "params": {"days": 60},
+     "effective": {"basis": "date_of_service", "from": "2026-11-01"},
+     "source": {"type": "document", "ref": "lakeside_notice_2026-10.md", "quote": "claims must be received within 60 calendar days of the date of service"}},
+    {"rule_id": "PY04-DUPLICATE", "kind": "no_duplicates", "denial_code": "D05", "params": {},
+     "source": {"type": "document", "ref": "PY04_lakeside_billing_manual.md 6.2", "quote": "Lakeside rejects duplicate claims for the same member, service and date of service"}}
+  ],
+  "not_applied": []
+}

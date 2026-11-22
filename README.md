@@ -21,7 +21,36 @@ logged), and **repeatable** (same input gives byte-identical output; no model ca
 | Remark reader (`claimcheck/hypotheses.py`) | built, run against Claude |
 | Bulletin step (`claimcheck/bulletins.py`) | built, run against Claude |
 | Message drafts (`claimcheck/messages.py`) | built, run against Claude |
-| Interface | not started |
+| Payer onboarding (`claimcheck/onboard.py`) | built, tested with a stand-in client; live script in `demo/README.md` |
+| Automator (`claimcheck/automator.py`) | built: drafts claims for verified visits on no claim |
+| Overdraw check (`review.overdrawn_authorizations`) | built: flags predictions that later payer decisions contradict |
+| Web app (`claimcheck/app/`) | built: 8 screens over the live pipeline |
+
+## The app
+
+```powershell
+python -m claimcheck.app
+```
+
+Then open http://localhost:8765. It loads in a few seconds and binds to this computer only.
+
+| Screen | What it shows and does |
+|---|---|
+| Claims | All 546 claims awaiting review (filter: will be denied, needs a decision, flagged, will be paid), plus the 3,830 past claims split into denied (payer code and remark, what the rules find, the fix) and paid. Search, payer filter, paging. |
+| Claim detail | Any claim: every rule checked with its source, the EVV visits, the authorization ledger and the claims that used it, the fix plan, review flags, the drafted message (or a button to draft one), and the audit trail. Past claims also show what the payer decided. |
+| EVV visits | All 5,076 visits with their claims (clickable), what to do next, and the automator: 891 claims drafted from unbilled visits, sorted by filing deadline, each checked like any claim. |
+| Authorizations | Units left, end dates and the full ledger per authorization; an errors panel you can minimise for overdrawn authorizations (AUTH11084). |
+| Payer rules | Each payer's rules with their quotes, code order, rules not applied and open questions; "Add payer". |
+| Add payer | Register a payer and upload its document, Claude drafts the rules, score against an answer key, approve. Approving rebuilds everything on the new rule set. |
+| Notices | Bulletins and notices; upload one, Claude drafts only the change, approve it. |
+| Rules & AI review | Claude's proposed rule from payer remarks with the history test, open questions, extraction and bulletin results, reviewer corrections. |
+
+Actions that call Claude need `ANTHROPIC_API_KEY` set before starting the app; anything already
+cached (all three payers, both bulletins, the hypotheses, 116 messages) works without it.
+
+**Automator, run as of 2026-11-22:** of 891 drafts, 425 would be paid ($16,769), 443 are past the
+payer's filing limit ($17,983 no longer billable), 22 would fail on authorization balance and 1 on the
+daily cap.
 
 ## How to run
 
