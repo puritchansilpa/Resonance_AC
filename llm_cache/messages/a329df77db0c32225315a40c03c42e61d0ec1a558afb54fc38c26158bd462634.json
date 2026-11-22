@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJFw9SmCm5jfXRwqdRTg",
+ "request_sha256": "a329df77db0c32225315a40c03c42e61d0ec1a558afb54fc38c26158bd462634",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Claim C020623 - units over daily maximum, decision needed before resubmission\",\"body\":\"Hi billing lead,\\n\\nClaim C020623 (patient PT0208, date of service 2026-09-13, service T1005) is predicted to be denied D06. The claim bills 36 units ($172.80), but the member's daily maximum is 32 units and no units have been paid for this member that day, so 36 exceeds the limit.\\n\\nThe suggested fix is to reduce the claim to 32 units and $153.60. The visit record supports this: one verified visit, 10:00 to 19:00 on 2026-09-13, 540 minutes.\\n\\nCould you decide whether to bill 32 units instead of 36 and let me know? The claim is set to be submitted 2026-09-30, and the decision is needed before resubmission.\\n\\nThank you.\"}",
+ "usage": {
+  "input_tokens": 970,
+  "output_tokens": 285
+ }
+}

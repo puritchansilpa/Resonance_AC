@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJFvqZjV7YC9jPJFdVda",
+ "request_sha256": "0fe4418f7ac80cf0329dce4f30804d51baa2e2f91a9e769aeb13e1b4f4db0bf3",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Do not submit claim C020570 - duplicate of C021731\",\"body\":\"Hi billing lead,\\n\\nPlease do not submit claim C020570 (patient PT0141, service S5125, date of service 2026-10-30, 14 units, $75.60). The same member, service and date were already billed as C021731, and the predicted result for C020570 is a denial under D05 for duplicate submission. The claim cannot be fixed by editing, so it should be held rather than corrected.\\n\\nPlease confirm once you have stopped C020570 from going out. The claim is currently due to be submitted in 23 days, so please confirm before that submission date to avoid a duplicate going to Northwind Health Plan.\\n\\nThank you.\"}",
+ "usage": {
+  "input_tokens": 973,
+  "output_tokens": 242
+ }
+}

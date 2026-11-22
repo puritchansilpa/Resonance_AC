@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJFnjyuGaQ6JY6zBFZhx",
+ "request_sha256": "42dba2304a7ade6e441a31f42675db089d1452a66624969e26b3af2d423772bf",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Claim C019470 - EVV visit verification needed before billing\",\"body\":\"Hello,\\n\\nClaim C019470 for patient PT0054, service code S5125, date of service 2026-09-06, 24 units, billed at $129.60, is currently predicted to be denied because no EVV visit is recorded for that date. The claim should not be billed unless the visit is found.\\n\\nCould you please confirm whether this visit took place and was recorded? If it was, please send the EVV visit details so we can verify it. If it did not take place or was not recorded, please let us know so we can hold the claim.\\n\\nThe claim is scheduled for submission on 2026-09-12, so an answer before then would help us avoid a denial and keep the filing on track.\"}",
+ "usage": {
+  "input_tokens": 916,
+  "output_tokens": 246
+ }
+}

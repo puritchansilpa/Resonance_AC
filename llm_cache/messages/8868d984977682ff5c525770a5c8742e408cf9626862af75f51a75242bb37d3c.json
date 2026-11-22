@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJG46AWdr7EA6ZJKGdHU",
+ "request_sha256": "8868d984977682ff5c525770a5c8742e408cf9626862af75f51a75242bb37d3c",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Claim C021368: units reduction needed before submission\",\"body\":\"Hi billing lead, claim C021368 (patient PT0029, service T1005, date of service 2026-11-02) is predicted to deny under D06. The member already has 16 units paid for that day, so the 20 billed units plus 16 total 36, over the 32-unit daily maximum. The proposed fix is to reduce units from 20 to 16 and the billed amount from 96.00 to 76.80. Please decide whether to bill the fewer units before resubmitting. Note that three other claims drawing on the same units (C019913, C020523, C021366) are predicted paid, not confirmed paid, so the paid-unit count may change. The claim is due to be submitted 2026-11-09, so a decision before then would help.\"}",
+ "usage": {
+  "input_tokens": 1016,
+  "output_tokens": 261
+ }
+}

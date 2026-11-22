@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJG9HWHHfki7hJYhFE7J",
+ "request_sha256": "4c50e628a0a5d001433dd6406a9f4239af1eea16d6c84c89fb013b421b8732fd",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Claim C021707 - do not submit, duplicate of C002336\",\"body\":\"Hi billing lead,\\n\\nPlease do not submit claim C021707 (patient PT0029, service T1005, date of service 2026-09-29, billed $96.00, 20 units). It duplicates claim C002336, which is already billed and paid or predicted paid. The same member, service and date are already submitted under C002336.\\n\\nThe claim also fails the Harbor Medicaid Plan daily maximum of 32 units: 20 units already paid for this member that day plus 20 would total 40. Editing the claim cannot fix this, and the fix note also lists units 20 to 12.\\n\\nPlease confirm the claim is held and not sent. Our filing window closes 30 days from the date of service, so please confirm before then.\\n\\nThank you.\"}",
+ "usage": {
+  "input_tokens": 1088,
+  "output_tokens": 277
+ }
+}

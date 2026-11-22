@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJFoTNZ1fuSVEL8HWahf",
+ "request_sha256": "6f91163a2264e0c69b7c9040099a96fe12b538bcc4917a62c2d644990520532b",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Claim C019506: decide whether to bill 32 units instead of 36 for 2026-10-28\",\"body\":\"Claim C019506 (patient PT0294, service T1005, date of service 2026-10-28) is predicted to deny under D06. Billing 36 units would exceed the member's 32-unit daily maximum. The verified visit ran 540 minutes. The proposed fix is to bill 32 units, reducing the amount from 172.80 to 153.60. Please decide whether to make this change before the claim is resubmitted. The daily count assumes no units were already paid that day, but claim C021190 drew units from that day and is only predicted paid, not confirmed. Please check C021190's status before finalizing the units.\"}",
+ "usage": {
+  "input_tokens": 1008,
+  "output_tokens": 844
+ }
+}

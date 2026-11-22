@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJG5NQ7ANNFjsefzct3h",
+ "request_sha256": "f8d26f7f306de130d2c7b08a0933c9e4ee677eb006fad0dfa20580bcebc8b170",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Claim C021582 past filing limit - write-off decision needed\",\"body\":\"Hi billing lead,\\n\\nClaim C021582 (patient PT0185, service code S5125, date of service 2026-09-29, billed $129.60 for 24 units) was submitted on 2026-11-27, 59 days after care. Northwind Health Plan's filing limit is 45 days, and editing the claim cannot fix this.\\n\\nThe claim is also a duplicate of C013767, which was already billed and paid or is predicted to be paid. It should not be submitted.\\n\\nWe need a write-off decision on C021582. Please advise as soon as possible so the account can be closed out.\"}",
+ "usage": {
+  "input_tokens": 1093,
+  "output_tokens": 226
+ }
+}

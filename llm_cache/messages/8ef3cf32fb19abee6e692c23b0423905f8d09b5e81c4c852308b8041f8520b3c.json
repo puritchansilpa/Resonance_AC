@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJFpUKP8gmxcuVwzxRru",
+ "request_sha256": "8ef3cf32fb19abee6e692c23b0423905f8d09b5e81c4c852308b8041f8520b3c",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Claim C019566: rejected EVV visit V003821 must be corrected before billing\",\"body\":\"Hello,\\n\\nClaim C019566 (patient PT0046, date of service 2026-09-17, service T1005, 8 units, $38.40) cannot be billed yet. Visit V003821 (clock in 07:15, clock out 09:26, 131 minutes) was rejected in EVV, so none of the visits on that date is verified and the claim is predicted to deny.\\n\\nEediting the claim will not fix this. Could you please review and correct the EVV record for visit V003821 so it can be verified? Once corrected, we can submit the claim to Summit Care Partners.\\n\\nThank you. Please let me know when the record is updated. The claim is scheduled for submission on 2026-10-03, so an update before then would help.\"}",
+ "usage": {
+  "input_tokens": 982,
+  "output_tokens": 276
+ }
+}

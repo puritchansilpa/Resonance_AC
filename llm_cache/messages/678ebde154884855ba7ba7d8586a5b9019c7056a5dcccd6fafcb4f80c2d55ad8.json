@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJG1o82k3xcLP7KtBfkM",
+ "request_sha256": "678ebde154884855ba7ba7d8586a5b9019c7056a5dcccd6fafcb4f80c2d55ad8",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Claim C021242: EVV visit missing for 2026-09-27\",\"body\":\"Hello,\\n\\nClaim C021242 (patient PT0110, service code T1005, 12 units, billed $57.60, date of service 2026-09-27) is about to be submitted to Summit Care Partners, but our records show no EVV visit recorded for that date. The claim is predicted to be denied for this reason, and it cannot be fixed by editing the claim. We should not bill it unless the visit is found.\\n\\nCould you confirm whether this visit took place and was recorded in EVV? If it was, please send us the visit details so we can verify it. If not, please let us know so we can hold the claim.\\n\\nThe claim is scheduled for submission in 5 days, so we would appreciate your reply before then, ahead of the filing limit.\\n\\nThank you,\\nBilling Team\"}",
+ "usage": {
+  "input_tokens": 912,
+  "output_tokens": 289
+ }
+}

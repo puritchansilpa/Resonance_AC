@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJFvV7fhkCgaHikHP1LL",
+ "request_sha256": "904f1b2fd40f7f9c3826a6ef92a94e1126d1dea6911ac22d1138a0d0b412e27a",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Claim C020456: units exceed 32-unit daily max, decision needed before resubmission\",\"body\":\"Hi billing lead,\\n\\nClaim C020456 (patient PT0099, date of service 2026-10-05, service T1005) is predicted to deny under D06. It bills 36 units, but the payer's daily maximum is 32 units, and no units have been paid for this member that day yet.\\n\\nThe fix on file is to reduce units from 36 to 32 and the billed amount from $172.80 to $153.60. Please decide whether to bill the lower figure before we resubmit. The claim was submitted 2026-10-25 and the 20-day window for this decision is running, so an answer soon would help us avoid a denial.\\n\\nThanks.\"}",
+ "usage": {
+  "input_tokens": 970,
+  "output_tokens": 251
+ }
+}

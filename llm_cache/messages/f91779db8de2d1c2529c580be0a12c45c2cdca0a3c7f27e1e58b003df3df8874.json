@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJFrJ8GAsQejkdERM49p",
+ "request_sha256": "f91779db8de2d1c2529c580be0a12c45c2cdca0a3c7f27e1e58b003df3df8874",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Claim C019911: rejected EVV visit V003887 must be corrected before billing\",\"body\":\"Hello, claim C019911 (patient PT0068, date of service 2026-10-21, service code T1019, 24 units, $146.40) is on hold. Visit V003887 (clock-in 2026-10-21 10:05, clock-out 16:10) was rejected in EVV, and no verified visit exists for that date, so the claim is predicted to deny. Editing the claim will not fix this. Please review and correct the EVV record for V003887 so it can be verified. The claim is due to be submitted in 12 days, and the payer is Summit Care Partners, so please correct it as soon as possible to allow billing before that deadline. Thank you.\"}",
+ "usage": {
+  "input_tokens": 982,
+  "output_tokens": 248
+ }
+}

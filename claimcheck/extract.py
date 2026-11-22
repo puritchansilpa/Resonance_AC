@@ -37,7 +37,6 @@ Needs ANTHROPIC_API_KEY for any request not already in the cache.
 from __future__ import annotations
 
 import argparse
-import hashlib
 import json
 import re
 import shutil
@@ -47,10 +46,11 @@ from datetime import date
 from pathlib import Path
 
 from . import config
+from .llm import OPUS, LLMError, cached_call, missing_credentials, request_key
 from .rule_kinds import ROUNDINGS, RULE_KINDS
 from .ruleset import RULES_DIR, RuleSetError, _validate_payer
 
-MODEL = "claude-opus-5-5"
+MODEL = OPUS
 EFFORT = "high"
 PROPOSED_DIR = RULES_DIR / "proposed"
 CACHE_DIR = PROPOSED_DIR / "cache"
@@ -73,7 +73,7 @@ PARAM_SCHEMAS = {
 EXAMPLE_FOR = {"PY01": "PY02", "PY02": "PY01", "PY03": "PY02"}
 
 
-class ExtractionError(RuntimeError):
+class ExtractionError(LLMError):
     pass
 
 
@@ -92,10 +92,10 @@ def _nullable(schema: dict) -> dict:
     return {"anyOf": [schema, {"type": "null"}]}
 
 
-def output_schema() -> dict:
-    """The rule template as a JSON schema (structured output)."""
+def rule_schema() -> dict:
+    """One rule in the template (shared with the bulletin step)."""
     params = {name: _nullable(s) for name, s in PARAM_SCHEMAS.items()}
-    rule = {
+    return {
         "type": "object",
         "additionalProperties": False,
         "required": ["rule_id", "kind", "denial_code", "params", "effective_from", "effective_to",
@@ -113,6 +113,11 @@ def output_schema() -> dict:
             "quote": {"type": "string"},
         },
     }
+
+
+def output_schema() -> dict:
+    """The rule template as a JSON schema (structured output)."""
+    rule = rule_schema()
     quoted = lambda extra: {  # noqa: E731
         "type": "object", "additionalProperties": False,
         "required": sorted(["quote", *extra]),
@@ -214,63 +219,6 @@ def build_request(payer_id: str, rules_dir: Path = RULES_DIR, payers_dir: Path =
             "schema": output_schema()}
 
 
-def request_key(request: dict) -> str:
-    return hashlib.sha256(json.dumps(request, sort_keys=True).encode()).hexdigest()
-
-
-# --------------------------------------------------------------------------- #
-# Calling Claude (with a cache keyed by the exact request)
-# --------------------------------------------------------------------------- #
-
-def call_claude(request: dict, client=None) -> dict:
-    import anthropic
-
-    client = client or anthropic.Anthropic()
-    try:
-        response = client.beta.messages.create(
-            model=request["model"],
-            max_tokens=16000,
-            # On a safety decline, the API re-runs the request on a fallback model.
-            betas=["server-side-fallback-2026-07-01"],
-            fallbacks="default",
-            system=[{"type": "text", "text": request["system"], "cache_control": {"type": "ephemeral"}}],
-            messages=request["messages"],
-            output_config={"effort": request["effort"],
-                           "format": {"type": "json_schema", "schema": request["schema"]}},
-        )
-    except anthropic.AuthenticationError as exc:
-        raise ExtractionError("The API key was rejected; check ANTHROPIC_API_KEY.") from exc
-    except anthropic.RateLimitError as exc:
-        raise ExtractionError("Rate limited by the API; try again shortly.") from exc
-    except anthropic.APIStatusError as exc:
-        raise ExtractionError(f"API error {exc.status_code}: {exc.message}") from exc
-    except anthropic.APIConnectionError as exc:
-        raise ExtractionError("Could not reach the API (network).") from exc
-
-    if response.stop_reason == "refusal":
-        raise ExtractionError("The model declined the request.")
-    if response.stop_reason == "max_tokens":
-        raise ExtractionError("The response was cut off at max_tokens.")
-    text = next((b.text for b in response.content if b.type == "text"), None)
-    if text is None:
-        raise ExtractionError("No text in the response.")
-    return {"text": text, "model": response.model, "stop_reason": response.stop_reason,
-            "request_id": getattr(response, "_request_id", None),
-            "usage": {"input_tokens": response.usage.input_tokens, "output_tokens": response.usage.output_tokens}}
-
-
-def cached_call(request: dict, cache_dir: Path = CACHE_DIR, refresh: bool = False, client=None) -> tuple[dict, bool]:
-    key = request_key(request)
-    path = cache_dir / f"{key}.json"
-    if path.exists() and not refresh:
-        return json.loads(path.read_text(encoding="utf-8")), True
-    result = call_claude(request, client)
-    result["request_sha256"] = key
-    cache_dir.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(result, indent=1, sort_keys=True) + "\n", encoding="utf-8", newline="\n")
-    return result, False
-
-
 # --------------------------------------------------------------------------- #
 # Checking and converting the model's draft
 # --------------------------------------------------------------------------- #
@@ -288,22 +236,25 @@ def unverified_quotes(draft: dict, docs: list[tuple[str, str]]) -> list[str]:
     return [label for label, quote in items if not quote.strip() or _norm(quote).strip('"') not in corpus]
 
 
+def rule_from_draft(r: dict) -> dict:
+    """One rule from the template shape into the rule-file shape."""
+    rule = {
+        "rule_id": r["rule_id"], "kind": r["kind"], "denial_code": r["denial_code"],
+        "params": {k: v for k, v in r["params"].items() if v is not None},
+        "source": {"type": "document", "ref": f"{r['source_file']} {r['source_section']}".strip(),
+                   "quote": r["quote"]},
+    }
+    eff = {k: v for k, v in (("from", r["effective_from"]), ("to", r["effective_to"])) if v}
+    if eff:
+        rule["effective"] = {"basis": "date_of_service", **eff}
+    return rule
+
+
 def draft_to_rule_file(draft: dict, payer_id: str, precedence: list[str]) -> dict:
     """Turn the model's draft into the rule-file format the engine loads."""
     if draft["payer_id"] != payer_id:
         raise ExtractionError(f"Draft is for {draft['payer_id']}, expected {payer_id}")
-    rules = []
-    for r in draft["rules"]:
-        rule = {
-            "rule_id": r["rule_id"], "kind": r["kind"], "denial_code": r["denial_code"],
-            "params": {k: v for k, v in r["params"].items() if v is not None},
-            "source": {"type": "document", "ref": f"{r['source_file']} {r['source_section']}".strip(),
-                       "quote": r["quote"]},
-        }
-        eff = {k: v for k, v in (("from", r["effective_from"]), ("to", r["effective_to"])) if v}
-        if eff:
-            rule["effective"] = {"basis": "date_of_service", **eff}
-        rules.append(rule)
+    rules = [rule_from_draft(r) for r in draft["rules"]]
     codes = [c for c in precedence] + sorted({r["denial_code"] for r in rules} - set(precedence))
     return {
         "payer_id": payer_id,
@@ -328,10 +279,7 @@ def extract(payer_id: str, rules_dir: Path = RULES_DIR, out_dir: Path = PROPOSED
             corrections: list[dict] | None = None) -> dict:
     request = build_request(payer_id, rules_dir, payers_dir, corrections, model)
     result, from_cache = cached_call(request, out_dir / "cache", refresh, client)
-    try:
-        draft = json.loads(result["text"])
-    except json.JSONDecodeError as exc:
-        raise ExtractionError("The response was not valid JSON.") from exc
+    draft = result["data"]
     approved = _approved(payer_id, rules_dir)
     precedence = approved["denial_precedence"] if approved else list(DENIAL_CODES)
     proposal = draft_to_rule_file(draft, payer_id, precedence)
@@ -388,7 +336,7 @@ def compare(proposal: dict, approved: dict) -> dict:
     """Match rules by meaning (type, code, effective dates, parameters), not by ID."""
     expected = [r for r in approved["rules"] if r["source"]["type"] == "document"]
     learned = [r["rule_id"] for r in approved["rules"] if r["source"]["type"] != "document"]
-    remaining = list(proposal["rules"])
+    remaining = [r for r in proposal["rules"] if r["source"]["type"] == "document"]
     matched, param_diffs, missing = [], [], []
     for a in expected:
         exact = next((p for p in remaining if _shape(p) == _shape(a)
@@ -424,7 +372,9 @@ def merge_for_use(proposal: dict, approved: dict | None) -> dict:
     """What would go live: the proposal's document rules + the approved learned rules and code order."""
     merged = json.loads(json.dumps(proposal))
     if approved:
-        merged["rules"] += [r for r in approved["rules"] if r["source"]["type"] != "document"]
+        have = {r["rule_id"] for r in merged["rules"]}
+        merged["rules"] += [r for r in approved["rules"]
+                            if r["source"]["type"] != "document" and r["rule_id"] not in have]
         merged["denial_precedence"] = list(approved["denial_precedence"])
         merged["precedence_source"] = approved["precedence_source"]
         missing = sorted({r["denial_code"] for r in merged["rules"]} - set(merged["denial_precedence"]))
@@ -509,9 +459,12 @@ def corrections_between(draft_file: dict, approved_file: dict, payer_id: str, no
 
 def approve(payer_id: str, approver: str, note: str = "", rules_dir: Path = RULES_DIR,
             out_dir: Path = PROPOSED_DIR, corrections_file: Path = CORRECTIONS_FILE,
-            today: date | None = None) -> dict:
-    proposal = json.loads((out_dir / f"{payer_id}.json").read_text(encoding="utf-8"))
-    meta = json.loads((out_dir / f"{payer_id}.meta.json").read_text(encoding="utf-8"))
+            today: date | None = None, proposal_path: Path | None = None) -> dict:
+    """Promote a proposal. `proposal_path` defaults to rules/proposed/PY0x.json; a bulletin
+    proposal (from claimcheck.bulletins) can be passed instead."""
+    proposal_path = proposal_path or out_dir / f"{payer_id}.json"
+    proposal = json.loads(proposal_path.read_text(encoding="utf-8"))
+    meta = json.loads(proposal_path.with_suffix(".meta.json").read_text(encoding="utf-8"))
     current = _approved(payer_id, rules_dir)
     approved = merge_for_use(proposal, current)
     approved["approval"] = {
@@ -523,7 +476,8 @@ def approve(payer_id: str, approver: str, note: str = "", rules_dir: Path = RULE
     }
     _validate_payer(approved)
     # The model's untouched draft, so edits the reviewer made to the proposal file count as corrections.
-    original = draft_to_rule_file(meta["draft"], payer_id, approved["denial_precedence"])
+    original = meta.get("original_proposal") or draft_to_rule_file(meta["draft"], payer_id,
+                                                                   approved["denial_precedence"])
     lessons = corrections_between(original, proposal, payer_id, note)
     if lessons:
         with open(corrections_file, "a", encoding="utf-8", newline="\n") as fh:
@@ -572,11 +526,11 @@ def main(argv=None) -> int:
             res = approve(args.payer, args.by, args.note)
             print(f"{args.payer} approved by {args.by}; {len(res['corrections_logged'])} correction(s) logged "
                   f"to {CORRECTIONS_FILE.name}")
-    except ExtractionError as exc:
+    except LLMError as exc:
         print(f"Extraction failed: {exc}", file=sys.stderr)
         return 1
     except Exception as exc:  # missing credentials surface here from the SDK constructor
-        if type(exc).__name__ in ("AnthropicError",) or "api_key" in str(exc).lower():
+        if missing_credentials(exc):
             print("No Anthropic credentials found. Set ANTHROPIC_API_KEY (the key from the exercise email) "
                   "and run again. Cached extractions work without it.", file=sys.stderr)
             return 1

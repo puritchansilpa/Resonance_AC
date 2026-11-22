@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJFwcEpmpn5MSHJMSkQg",
+ "request_sha256": "348bd3ca031a4bf6f492d624c1111efd3a65e10a58bf17a51b413c73da93d6a2",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Claim C020684 past filing limit, needs write-off decision\",\"body\":\"Hi billing lead,\\n\\nClaim C020684 (patient PT0143, service code T1005, 12 units, $57.60, date of service 2026-09-17) was submitted 2027-01-04, which is 109 days after care. Summit Care Partners' filing limit is 60 days, and the predicted outcome is denial under D03.\\n\\nEditing the claim cannot fix this timing issue, so it cannot be corrected and resubmitted to meet the limit. I need a write-off decision on this claim from you. Please confirm whether it should be written off so we can close it out.\\n\\nThe visit itself (V004031, 181 minutes, verified) is not in question; the problem is only the filing deadline. Thank you for reviewing this before the claim is processed further.\"}",
+ "usage": {
+  "input_tokens": 1000,
+  "output_tokens": 280
+ }
+}

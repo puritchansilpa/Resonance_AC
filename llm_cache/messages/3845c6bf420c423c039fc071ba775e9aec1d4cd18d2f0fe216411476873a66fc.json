@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJFjDy3YCiivA3NXeVbG",
+ "request_sha256": "3845c6bf420c423c039fc071ba775e9aec1d4cd18d2f0fe216411476873a66fc",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Claim C019112: rejected EVV visit V003730 must be corrected before billing\",\"body\":\"Hi,\\n\\nClaim C019112 (patient PT0055, service code S5125, 20 units, date of service 2026-09-12, billed amount 108.00) is about to be submitted to Harbor Medicaid Plan, but it is predicted to be denied. Visit V003730 (clock in 2026-09-12 13:45, clock out 18:55, 310 minutes) has a rejected EVV verification status, and no visit on that date is verified. The claim cannot be fixed by editing it, so the EVV record must be corrected first.\\n\\nCould you please correct the EVV record for visit V003730 so the claim can be billed? The claim is scheduled to be submitted in 2 days, and the correction is needed before then.\\n\\nThank you.\"}",
+ "usage": {
+  "input_tokens": 986,
+  "output_tokens": 283
+ }
+}

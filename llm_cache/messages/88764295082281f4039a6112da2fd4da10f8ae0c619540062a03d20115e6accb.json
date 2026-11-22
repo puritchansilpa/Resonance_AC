@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJFnuuhViWy241uxgqER",
+ "request_sha256": "88764295082281f4039a6112da2fd4da10f8ae0c619540062a03d20115e6accb",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Prior authorization request for claim C019478, patient PT0223, service S5125, DOS 2026-09-29\",\"body\":\"Our billing team is preparing claim C019478 for Northwind Health Plan (payer PY01). The claim has no prior authorization number on it, and the authorization field is blank. Please request or confirm a prior authorization covering member PT0223, service code S5125, and date of service 2026-09-29. Our records reference AUTH12965 for this care, so please check whether that authorization applies and whether it covers the service units, which we are reviewing as 2 rather than 30. Please send the authorization number or your determination to our billing team before the claim is resubmitted, so we can correct the claim accordingly. Thank you for your help.\"}",
+ "usage": {
+  "input_tokens": 964,
+  "output_tokens": 814
+ }
+}

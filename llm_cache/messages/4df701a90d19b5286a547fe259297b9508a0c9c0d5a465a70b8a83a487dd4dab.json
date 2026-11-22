@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJG6vbsouFWKqq4wj4XH",
+ "request_sha256": "4df701a90d19b5286a547fe259297b9508a0c9c0d5a465a70b8a83a487dd4dab",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Do not submit claim C021628 - duplicate of C002392\",\"body\":\"Hi billing lead,\\n\\nPlease do not submit claim C021628 (patient PT0255, service S5125, date of service 2026-10-16, billed $129.60). The same member, service and date is already billed as C002392, so this claim duplicates it. The payer, Harbor Medicaid Plan, is predicted to deny it as a duplicate (D05). It also fails the daily unit maximum (D06): 24 units already paid that day plus 24 would exceed the 32-unit limit. Editing the claim cannot fix this, and the units would need to drop from 24 to 8 in any case.\\n\\nCould you hold this claim and confirm it is removed from the submission queue? The claim is scheduled for submission on 2026-11-20, so please confirm before then.\\n\\nThank you.\"}",
+ "usage": {
+  "input_tokens": 1046,
+  "output_tokens": 289
+ }
+}

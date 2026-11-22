@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJFyDqk8tmpEkkqvkggw",
+ "request_sha256": "88ec70fa63c10c84d381b8a5b0412f30cb53ac94eb113a056a8d9d81e9fa7032",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Claim C020752 on hold: visit V004047 pending aggregator verification\",\"body\":\"Hi, claim C020752 (patient PT0103, date of service 2026-09-25, service code S5125, 20 units, billed $108.00) is predicted to be denied as D01 because visit V004047 has no verified EVV record. The visit, clocked in 09:10 and out 14:03 on 2026-09-25, is still in manual_edit_pending status. The claim cannot be fixed by editing it, so we are holding it. Could you please follow up on visit V004047 with the aggregator and let us know once it is verified? The claim is currently scheduled for submission on 2026-09-28, so we need the verification before then. Once verified, the outcome may change, and we will re-check the claim before submitting.\"}",
+ "usage": {
+  "input_tokens": 1076,
+  "output_tokens": 264
+ }
+}

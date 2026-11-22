@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJG3mysmU9fqq4EZdH9d",
+ "request_sha256": "7ecb6e881cfcf99547f33b98f385ccb863982776e8875074bce5702a5072fdf3",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Decision needed on units for claim C021344 before submission\",\"body\":\"Claim C021344 (service S5125, date of service 2026-10-23, patient PT0162) is predicted to be denied under code D06. The member already has 24 units paid for that day. Adding the 20 billed units makes 44, which is over the 32-unit daily maximum. The suggested fix is to reduce units from 20 to 8 and the billed amount from 108.00 to 43.20. Please decide whether to bill fewer units. Note that the 24 units include claim C021336, which is predicted paid but not confirmed paid. Please reply with your decision before the claim is submitted on 2026-11-02.\"}",
+ "usage": {
+  "input_tokens": 1008,
+  "output_tokens": 822
+ }
+}

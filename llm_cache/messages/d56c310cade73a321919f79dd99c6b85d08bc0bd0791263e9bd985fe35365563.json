@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJG4NVH4ZW9zsTeErJYh",
+ "request_sha256": "d56c310cade73a321919f79dd99c6b85d08bc0bd0791263e9bd985fe35365563",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Authorization increase request for claim C021374 (AUTH10119)\",\"body\":\"Hello,\\n\\nClaim C021374 for patient PT0011 (date of service 2026-10-11, service code T1005) bills 16 units at $76.80. Only 8 of the 24 units on authorization AUTH10119 remain, because paid claims C000860 (6 units) and C016808 (10 units) already used the rest. As billed, the claim is predicted to be denied under D02.\\n\\nWe are requesting an increase to AUTH10119 so the remaining 16 units can be billed. Please let us know whether an increase is possible and what you need from us. We plan to submit the claim in 3 days. If no increase is available, we will correct the claim to 8 units and $38.40 before submitting.\\n\\nThank you,\\nBilling Team\"}",
+ "usage": {
+  "input_tokens": 974,
+  "output_tokens": 713
+ }
+}

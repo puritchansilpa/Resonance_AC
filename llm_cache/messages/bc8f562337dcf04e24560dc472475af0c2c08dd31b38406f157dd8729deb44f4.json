@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJFjk2JZ7XSmpHgqnkBW",
+ "request_sha256": "bc8f562337dcf04e24560dc472475af0c2c08dd31b38406f157dd8729deb44f4",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Claim C019181 on hold: no EVV visit recorded for 2026-11-05\",\"body\":\"Hello,\\n\\nClaim C019181 for patient PT0054, service code S5125, 14 units, billed at 75.60, has no EVV visit recorded for the date of service, 2026-11-05. Our check predicts this claim would be denied (D01). It should not be billed unless the visit is found.\\n\\nCould you please confirm whether this visit took place and whether it was recorded in EVV? If a visit exists, please send the EVV visit details so we can verify them. If no visit took place, please let us know so we can close the claim.\\n\\nThe claim is scheduled for submission in two days, so we would appreciate your reply before then, since the claim cannot be billed without a verified visit.\\n\\nThank you,\\nBilling Team\"}",
+ "usage": {
+  "input_tokens": 916,
+  "output_tokens": 277
+ }
+}

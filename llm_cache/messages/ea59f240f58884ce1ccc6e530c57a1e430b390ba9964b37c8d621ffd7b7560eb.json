@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJG819WSHQpjCEkLKeC7",
+ "request_sha256": "ea59f240f58884ce1ccc6e530c57a1e430b390ba9964b37c8d621ffd7b7560eb",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Do not submit claim C021672 - duplicate of C008316\",\"body\":\"Hi billing lead,\\n\\nPlease do not submit claim C021672 for patient PT0169, service code T1019, 7 units, date of service 2026-09-28, billed at 42.70 under payer Northwind Health Plan (PY01). The same member, service and date were already billed as claim C008316, and our review shows this claim would be predicted denied as a duplicate (D05). The claim cannot be fixed by editing it, so it should be held rather than corrected and resubmitted.\\n\\nCould you confirm that C021672 has been removed from the submission queue and that no separate claim is being filed for this visit? Please confirm before the claim's planned submission on 2026-10-21, so we avoid a duplicate filing.\\n\\nThank you.\"}",
+ "usage": {
+  "input_tokens": 973,
+  "output_tokens": 274
+ }
+}

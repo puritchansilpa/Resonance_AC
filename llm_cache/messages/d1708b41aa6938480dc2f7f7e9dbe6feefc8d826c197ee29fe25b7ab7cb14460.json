@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJFwoAeq19TQ3QcfJ6sN",
+ "request_sha256": "d1708b41aa6938480dc2f7f7e9dbe6feefc8d826c197ee29fe25b7ab7cb14460",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Authorization increase request for claim C020714 (AUTH11275)\",\"body\":\"Claim C020714 for patient PT0101 (service 2026-10-27, code S5125) bills 16 units, but authorization AUTH11275 has only 6 of 24 units remaining. Paid claims C020307 (9 units) and C004823 (9 units) have used the balance. C020307 is predicted paid, not confirmed. Could you review whether AUTH11275 can be increased so the remaining units can be billed? The authorization ends 2026-11-30. We plan to submit the claim on 2026-11-06, so an answer before then would help. If an increase is not possible, the claim would need to be reduced to 6 units, billed at 32.40 instead of 86.40.\"}",
+ "usage": {
+  "input_tokens": 1009,
+  "output_tokens": 924
+ }
+}

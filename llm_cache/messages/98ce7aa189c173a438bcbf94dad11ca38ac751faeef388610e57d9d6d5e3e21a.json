@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJFv3fUjfm18AeVkap7V",
+ "request_sha256": "98ce7aa189c173a438bcbf94dad11ca38ac751faeef388610e57d9d6d5e3e21a",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Claim C020406: units exceed daily maximum, decision needed before resubmission\",\"body\":\"Hello billing lead, claim C020406 (patient PT0059, service S5125, date of service 2026-10-17) is predicted to deny under D06. It bills 36 units, but the member's daily maximum is 32 units, and no units have yet been paid for that day. Please decide whether to reduce the claim to 32 units and a billed amount of 172.80 (from 194.40) before resubmitting. Note that claims C020410 drew down units on this day and are predicted paid, not confirmed paid, so please check that status as well. The claim is set for submission on 2026-11-15, and the filing limit is the deadline to keep in mind.\"}",
+ "usage": {
+  "input_tokens": 1008,
+  "output_tokens": 243
+ }
+}

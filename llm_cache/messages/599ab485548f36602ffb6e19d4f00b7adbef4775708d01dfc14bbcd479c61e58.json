@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJFxYLCPRC33aXWjB8PZ",
+ "request_sha256": "599ab485548f36602ffb6e19d4f00b7adbef4775708d01dfc14bbcd479c61e58",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Decision needed: units for claim C020735 before submission\",\"body\":\"Claim C020735 (patient PT0005, date of service 2026-10-15, billed 194.40 for 36 units) is predicted to deny under D06. The member's 32-unit daily maximum would be exceeded, because 0 units are already paid that day and 36 would be added. Please decide whether to bill 32 units instead, lowering the billed amount to 172.80, before the claim is submitted on 2026-12-22. The units are currently drawn by claims C019231, which are predicted paid but not known to be paid, so please check those as part of your decision. Visit V004042 is verified at 554 minutes.\"}",
+ "usage": {
+  "input_tokens": 1008,
+  "output_tokens": 837
+ }
+}

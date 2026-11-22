@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJFpdqsX9DA8v2ctwDR5",
+ "request_sha256": "5121f5876f7033d6bd7695796aa8fa4ae8c05ab62cb94ef695ec574d2f1d1784",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Claim C019599: rejected EVV visit V003828 must be corrected before billing\",\"body\":\"Hello,\\n\\nClaim C019599 (patient PT0038, date of service 2026-09-29, service code S5125, 24 units, billed $129.60) cannot be submitted as it stands. Visit V003828 (clock in 2026-09-29 10:45, clock out 16:58, 373 minutes) has a rejected EVV verification status, and the payer's prediction is denial because no visit on that date is verified.\\n\\nEditing the claim will not resolve this. Could you please correct the EVV record for visit V003828 so it can be verified? Once it is, we can bill the claim.\\n\\nThe claim was submitted 2026-10-07 and we are preparing to file it, so please let me know as soon as possible.\\n\\nThank you.\"}",
+ "usage": {
+  "input_tokens": 982,
+  "output_tokens": 281
+ }
+}

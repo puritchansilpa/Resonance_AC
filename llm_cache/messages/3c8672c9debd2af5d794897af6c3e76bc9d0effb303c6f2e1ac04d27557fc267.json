@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJG37f2ivqdKbC1k1Z6h",
+ "request_sha256": "3c8672c9debd2af5d794897af6c3e76bc9d0effb303c6f2e1ac04d27557fc267",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Claim C021331 (PT0243, DOS 2026-09-14): decision needed on units before resubmitting\",\"body\":\"Claim C021331 for patient PT0243 (service T1019, date of service 2026-09-14) is predicted to deny under D06. The member already has 20 units paid for that day, and this claim's 16 units would bring the total to 36, over the 32-unit daily maximum. Those 20 units are predicted paid, not confirmed paid. Please decide whether to bill fewer units: reducing the claim from 16 to 12 units would bring the total to 32 and change the billed amount from 97.60 to 73.20. Please make this decision before the claim is resubmitted. The visit V004160 (249 minutes) is verified.\"}",
+ "usage": {
+  "input_tokens": 1008,
+  "output_tokens": 819
+ }
+}

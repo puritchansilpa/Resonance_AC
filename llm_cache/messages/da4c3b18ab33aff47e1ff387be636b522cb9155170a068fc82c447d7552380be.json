@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJG1Uycq32XNv9xWx5AN",
+ "request_sha256": "da4c3b18ab33aff47e1ff387be636b522cb9155170a068fc82c447d7552380be",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Decision needed on proposed fix for claim C021224\",\"body\":\"Claim C021224 (patient PT0280, date of service 2026-11-07, service T1019, Harbor Medicaid Plan) is predicted to deny with D07 because no prior authorization number is on the claim. The proposed fix is to set the auth ID to AUTH13714, change units from 30 to 11, and reduce the billed amount from 183.00 to 67.10. Please decide on this change before we resubmit, which is planned for 2026-11-21. Note that AUTH13714 shows 0 of 92 units left. If fixes to earlier claims are applied, this claim may become not fixable (D02) and would need more units from the payer. Please let me know your decision on the change.\"}",
+ "usage": {
+  "input_tokens": 987,
+  "output_tokens": 830
+ }
+}

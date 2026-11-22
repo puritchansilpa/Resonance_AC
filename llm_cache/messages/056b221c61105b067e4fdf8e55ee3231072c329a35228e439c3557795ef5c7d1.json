@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJG76Jmn9K48jm8JJUSb",
+ "request_sha256": "056b221c61105b067e4fdf8e55ee3231072c329a35228e439c3557795ef5c7d1",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Do not submit claim C021632: duplicate of C018570\",\"body\":\"Hi billing lead,\\n\\nPlease do not submit claim C021632 (patient PT0038, service S5125, date of service 2026-09-12, 20 units, $108.00). The payer predicts a denial as a duplicate: the same member, service and date were already submitted as claim C018570, which is either billed and paid or predicted paid. The claim cannot be fixed by editing, so it should be held and not sent.\\n\\nPlease confirm that C021632 has been removed from the submission queue and that the team is aware of the duplicate. The claim is currently set for submission on 2026-11-07, so please confirm before then to avoid an unnecessary denial.\\n\\nThank you.\"}",
+ "usage": {
+  "input_tokens": 972,
+  "output_tokens": 251
+ }
+}

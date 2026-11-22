@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJFtKdMcdXQxQzusVQQd",
+ "request_sha256": "f07a0efea18b8e568d53d68408e759589dea966a1c28127bc952eee80667f4f2",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Decision needed on claim C020215 units before submission\",\"body\":\"Claim C020215 (patient PT0216, service code T1019, date of service 2026-10-06) is predicted to deny under D06. It bills 36 units for 219.60, but the member's daily maximum is 32 units. With no units already paid that day, 36 is over the limit. The proposed fix is to bill 32 units for 195.20. Please decide whether to make this change before the claim is submitted, which is planned for 2026-10-07, one day away. Also, claims C019521, C019706 and C020229 draw on the same day's units. They are predicted paid, not confirmed, so please check their status, since it affects the units available to this claim.\"}",
+ "usage": {
+  "input_tokens": 1016,
+  "output_tokens": 848
+ }
+}

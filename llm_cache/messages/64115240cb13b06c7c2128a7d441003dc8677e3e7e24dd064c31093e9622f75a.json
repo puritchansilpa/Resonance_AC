@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJG6BRpfsfFLGbEJVprM",
+ "request_sha256": "64115240cb13b06c7c2128a7d441003dc8677e3e7e24dd064c31093e9622f75a",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Do not submit claim C021600 - duplicate of C009601\",\"body\":\"Hi billing lead,\\n\\nPlease do not submit claim C021600 (patient PT0091, service S5125, date of service 2026-09-08, 10 units, $54.00). The same member, service and date is already billed as C009601, and the payer's prediction for C021600 is denied under D05 for that duplication. The claim cannot be corrected by editing it, so it should be held and not filed.\\n\\nPlease confirm that C021600 has been pulled from the submission queue and that C009601 is the claim being tracked for this visit. The claim has 36 days before the submission window closes, so please confirm this before the next submission run.\\n\\nThank you.\"}",
+ "usage": {
+  "input_tokens": 973,
+  "output_tokens": 241
+ }
+}

@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJG21CZayExvUrv4oXyD",
+ "request_sha256": "d24cd2d8d589ae9382b7189719be8cf9565744ae6e695f0e539e2aa4ecc8bc70",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Claim C021249 on hold: visit V004145 pending aggregator verification\",\"body\":\"Hi,\\n\\nClaim C021249 (patient PT0075, date of service 2026-10-14, service code T1019, 12 units, billed $73.20) is set to be submitted on 2026-10-17 but should be held. Visit V004145 (clock-in 09:05, clock-out 12:16, 191 minutes) is still awaiting aggregator approval (manual_edit_pending), and without a verified visit on that date the claim is predicted to be denied under D01. Editing the claim will not fix this.\\n\\nCould you please follow up on visit V004145 with the EVV aggregator and let me know once it is verified? We would like to submit only after that, and the claim has 3 days until its planned submission.\\n\\nThank you.\"}",
+ "usage": {
+  "input_tokens": 1079,
+  "output_tokens": 274
+ }
+}

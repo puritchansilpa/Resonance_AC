@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJG9SupiCEU4unVQtazR",
+ "request_sha256": "2302381938012349d5ae5a74272a76bfd970b174097850c24611f9f3df37ac05",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Do not submit claim C021709: duplicate of C000490\",\"body\":\"Hi billing lead,\\n\\nPlease do not submit claim C021709 (patient PT0226, service code T1019, date of service 2026-09-11, 24 units, billed $146.40 to Summit Care Partners). The same member, service and date were already submitted as C000490, and C021457 is also listed against that date. The prediction shows this claim would be denied as D05 (duplicate). The claim cannot be fixed by editing, so it should be withdrawn from the submission queue rather than corrected.\\n\\nCould you confirm it has been removed from the batch? It is scheduled for submission on 2026-11-07, so please confirm before that date to avoid a duplicate filing.\\n\\nThank you.\"}",
+ "usage": {
+  "input_tokens": 976,
+  "output_tokens": 259
+ }
+}

@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJFzjq4A8EcRq6GSMnFD",
+ "request_sha256": "8add8a4acef8272017acb3e7f96ba31a58262ae3b91e477402fd442e3cf11af5",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Claim C021017 on hold: Visit V004101 pending aggregator verification\",\"body\":\"Hello,\\n\\nClaim C021017 (patient PT0270, service code S5125, date of service 2026-10-17, 32 units, billed $172.80) should not be submitted yet. Its only visit, V004101, is still in manual_edit_pending status and is awaiting aggregator approval. Without a verified visit, the claim is predicted to be denied under D01 by Summit Care Partners.\\n\\nCould you please follow up on visit V004101 with the aggregator and let me know once it is verified? The claim is scheduled for submission on 2026-10-30, so verification is needed before then. I will hold the claim until I hear back from you.\\n\\nThank you.\"}",
+ "usage": {
+  "input_tokens": 1075,
+  "output_tokens": 254
+ }
+}

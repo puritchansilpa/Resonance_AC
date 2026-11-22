@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJFq9u8MKbctg4DRfCke",
+ "request_sha256": "b2aefee288f61c782a53c10988cdbe18470ac92931bc6ac179e353eb04542d5f",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Claim C019690: decision needed on proposed auth and units fix before resubmission\",\"body\":\"Hi billing lead, claim C019690 (patient PT0015, date of service 2026-10-07, service T1005, billed 172.80) is predicted to be denied. Authorization AUTH10176 ran 2026-06-01 to 2026-08-31, so it does not cover the date of service. The claim also exceeds the payer's 32-unit daily maximum: 36 units billed with none previously paid that day. The proposed fix is to change the auth to AUTH10181 and reduce units from 36 to 32, lowering the billed amount from 172.80 to 153.60. Could you please decide whether to approve this change before we resubmit? The claim was submitted on 2026-10-25 and the filing limit is a concern, so a decision by then would help.\"}",
+ "usage": {
+  "input_tokens": 1041,
+  "output_tokens": 281
+ }
+}

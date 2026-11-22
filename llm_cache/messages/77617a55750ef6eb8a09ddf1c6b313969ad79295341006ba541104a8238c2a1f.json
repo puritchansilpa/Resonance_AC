@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJFmQtuytfQgRao8WohU",
+ "request_sha256": "77617a55750ef6eb8a09ddf1c6b313969ad79295341006ba541104a8238c2a1f",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\": \"Claim C019347: daily unit maximum exceeded, decision needed before resubmission\", \"body\": \"Hi billing lead, claim C019347 (patient PT0281, date of service 2026-09-04, service T1005) is predicted to deny under D06. The claim bills 36 units, but the daily maximum is 32 units and no units have been paid for this member that day, so 36 exceeds the limit. The proposed fix is to reduce units from 36 to 32 and the billed amount from $172.80 to $153.60. Could you decide whether to make that change before the claim is resubmitted? The claim was submitted 2026-10-05 and is currently at 31 days to submit, so a decision soon would help avoid a delay. Thank you.\"}",
+ "usage": {
+  "input_tokens": 970,
+  "output_tokens": 246
+ }
+}

@@ -18,6 +18,9 @@ logged), and **repeatable** (same input gives byte-identical output; no model ca
 | Fixer (`claimcheck/fixer.py`) | built |
 | Manual-review flags (`claimcheck/review.py`) | built |
 | Rule extractor (`claimcheck/extract.py`) | built, run against Claude, evaluated |
+| Remark reader (`claimcheck/hypotheses.py`) | built, run against Claude |
+| Bulletin step (`claimcheck/bulletins.py`) | built, run against Claude |
+| Message drafts (`claimcheck/messages.py`) | built, run against Claude |
 | Interface | not started |
 
 ## How to run
@@ -38,6 +41,9 @@ $env:ANTHROPIC_API_KEY = "<your key>"
 python -m claimcheck.extract evaluate              # draft all 3 payers, compare, backtest
 python -m claimcheck.extract run PY03              # draft one payer -> rules/proposed/
 python -m claimcheck.extract approve PY03 --by "Name" --note "why the draft was changed"
+python -m claimcheck.hypotheses propose            # Claude reads remarks on missed denials; history tests
+python -m claimcheck.bulletins evaluate            # replay the two real bulletins as changes
+python -m claimcheck.messages draft --all          # notes for coordinators, payers, billing lead
 ```
 
 ## Results (rule set `d03a749180dc`)
@@ -148,6 +154,54 @@ output tokens (roughly $0.20). The open questions are worth reading in `rules/pr
 Caveat: the approved files were also written with AI help (Claude Code), so 25/25 shows that two
 readings of the documents agree, not that they are right. The independent check is the backtest
 against what payers actually did.
+
+## Other places Claude helps (never in a claim decision)
+
+All Claude calls share `claimcheck/llm.py`: structured output against a fixed schema, and a cache
+keyed by the SHA-256 of the exact request (`llm_cache/`, `rules/proposed/cache/`), so every result
+replays identically without an API key.
+
+**Remark reader: rules nobody wrote down** (`claimcheck/hypotheses.py`, Claude Opus 5.5). It starts from
+the documents-only rules (approved files with learned rules removed), backtests history, and groups
+the claims it gets wrong by payer, outcome and remark. Claude reads those groups and proposes
+hypotheses, each written as an engine rule type. **Code then decides**: for each hypothesis it counts
+the claims the rule would fail, how many the payer denied with that code (support) and how many it
+paid (contradictions). It searches for a start date on both date bases, then confirms with a full
+backtest (claims fixed, claims broken). Tested by hand on the Summit idea: start 1 July 2026 by date
+of service, 35 claims support it, 0 contradict it, backtest 97.15% → 98.07%, 0 broken. A submission-date
+start explains fewer claims (26), which is how history shows the rule follows the date of care. A wrong
+idea (Summit 20-day filing) is rejected: 169 paid claims contradict it. **Run against Claude:** from
+the documents-only baseline, Claude proposed one hypothesis, Summit whole hours (D10), noting that both
+"amendment 3" remarks describe the same rule. History confirmed it (start 1 July 2026, 35 support, 0
+contradictions, 35 claims fixed, 0 broken). Claude marked all six "contact payer / under review" groups
+as not explainable, and named C012372's authorization balance as the likely cause of the one remaining
+miss, which matches the inherited miss described above. Supported hypotheses go to
+`rules/hypotheses/proposals.json`; `approve H1 --by <name>` adds one to the payer's file and refuses
+a rule that is already there.
+
+**Bulletins: draft only the change** (`claimcheck/bulletins.py`, Claude Opus 5.5). Given the current
+approved file and a new bulletin, Claude lists the rules the bulletin ends (with their last date) and
+the rules it adds, quoting the bulletin. Code applies the change, validates it and checks the quotes;
+rules the bulletin doesn't touch can't drift. The evaluation rebuilds each payer's file as it stood
+before its real bulletin, has Claude draft the change (with the other bulletin as the worked example),
+and compares the result with today's file. **Run against Claude:** Northwind 8/8 and Harbor 10/10 rules
+match, end dates correct, every untouched rule left as it was, all quotes verified. Claude raised two
+questions on the Harbor bulletin: does "on 1 September" mean "on or after", and is a weekend claim
+carrying both U2 and U3 denied?
+
+**Message drafts** (`claimcheck/messages.py`, Claude Haiku 5.5, one short call per claim as the brief
+suggests). Code decides who gets a message and what it asks, from the fix plan:
+
+| Recipient | When | Claims |
+|---|---|---|
+| care coordinator | no verified visit (pending, rejected or missing) | 28 |
+| payer care manager | authorization used up, too small or not on file | 15 |
+| billing lead | decisions and write-offs: fewer units, late filing, duplicates | 73 |
+
+Claude only writes the wording from the facts given. Every claim, visit, authorization and member ID,
+and every date, in a draft must appear in those facts; anything else marks the draft
+`check_references`. Drafts are written to `output/messages/`; nothing is sent. **Run against Claude:**
+116 drafts, none flagged.
 
 ## Rule set
 

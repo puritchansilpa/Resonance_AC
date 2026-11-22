@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJFxB711vvhAfGTsuwf7",
+ "request_sha256": "395c963ba455f8f1c87142ba0b54a49e286f29c877a3218487d3dff09f8a2811",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Authorization increase request for claim C020724 (AUTH11022)\",\"body\":\"Claim C020724 for patient PT0079, date of service 2026-10-20, bills 12 units for $64.80, but authorization AUTH11022 has only 10 of 56 units remaining. Paid claims C009855 (12), C013136 (18), C013072 (7) and C015739 (9) have already used 46 units. Visit V004039 was verified at 189 minutes. We are requesting an increase to AUTH11022 so the 12 units can be billed. If an increase is not possible, the claim would need to be corrected to 10 units at $54.00 before resubmission. Please let us know your decision by 2026-10-28, before the claim is submitted.\"}",
+ "usage": {
+  "input_tokens": 988,
+  "output_tokens": 977
+ }
+}

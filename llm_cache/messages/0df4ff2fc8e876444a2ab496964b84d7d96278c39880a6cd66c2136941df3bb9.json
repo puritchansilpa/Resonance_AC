@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJG9nyKWjEHJv7tNF6Qh",
+ "request_sha256": "0df4ff2fc8e876444a2ab496964b84d7d96278c39880a6cd66c2136941df3bb9",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Do not submit claim C021724 - duplicate of C014499\",\"body\":\"Hi billing lead, please hold claim C021724 (patient PT0084, service code T1005, date of service 2026-09-03, billed $86.40, Harbor Medicaid Plan) and do not submit it. The same member, service and date were already billed as C014499, so this claim would be a duplicate. The claim also fails the payer's daily unit maximum: 18 units were already paid for this member that day, and adding 18 more would exceed the 32-unit limit. Editing this claim will not fix the duplicate, so it should be closed rather than corrected. Please confirm once it is on hold. Filing limit is 25 days from today, so please confirm before then.\"}",
+ "usage": {
+  "input_tokens": 1046,
+  "output_tokens": 244
+ }
+}

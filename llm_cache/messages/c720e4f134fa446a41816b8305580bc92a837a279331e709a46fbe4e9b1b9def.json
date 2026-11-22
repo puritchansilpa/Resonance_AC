@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJG8uq3Vqv4TRjb6A6w5",
+ "request_sha256": "c720e4f134fa446a41816b8305580bc92a837a279331e709a46fbe4e9b1b9def",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Decision needed on proposed change to claim C021703 before resubmitting\",\"body\":\"Claim C021703 for patient PT0300 (service S5125, date of service 2026-09-04) is predicted to be denied. It bills 36 units, but the 532 verified minutes support only 35 whole units. It also exceeds the 32-unit daily maximum and duplicates claim C004766 for the same member, service and date. The proposed fix is frequency code 1 to 7, units 36 to 32, and billed amount 194.40 to 172.80. Please decide whether to approve this change before we resubmit. Note that the units available are drawn by claims C019716 and C020959, which are predicted paid, not confirmed paid. We also cannot confirm whether this payer reports D09 or D05 first. Thank you.\"}",
+ "usage": {
+  "input_tokens": 1132,
+  "output_tokens": 972
+ }
+}

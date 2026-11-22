@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJG8NA3oiasTcB5STKhf",
+ "request_sha256": "2855ae61fbb3d602ac1efd85520c53375741862beff66b027902220c5efcc28f",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Claim C021680 past payer filing limit, needs write-off decision\",\"body\":\"Hi billing lead,\\n\\nClaim C021680 (patient PT0277, service code T1005, 32 units, $153.60, date of service 2026-09-25) was submitted 2027-02-01, which is 129 days after care. Summit Care Partners (PY03) has a filing limit of 60 days, so the claim is predicted to be denied under D03.\\n\\nEditing the claim cannot fix the timing problem. The claim also appears to duplicate C017665 for the same member, service and date (predicted D05), and the history does not show which denial code the payer reports first.\\n\\nI need a write-off decision on C021680. Please let me know your decision before the claim is filed, since filing will not change the outcome.\\n\\nThank you.\"}",
+ "usage": {
+  "input_tokens": 1089,
+  "output_tokens": 271
+ }
+}

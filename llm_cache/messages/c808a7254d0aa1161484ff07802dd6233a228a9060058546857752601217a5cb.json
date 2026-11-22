@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJG2iobePypvo7CZshYj",
+ "request_sha256": "c808a7254d0aa1161484ff07802dd6233a228a9060058546857752601217a5cb",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Authorization increase request for claim C021292 (AUTH12636)\",\"body\":\"Claim C021292 for patient PT0197 (service T1005, 36 units, billed 172.80, date of service 2026-09-01) cannot be paid as billed. AUTH12636 authorizes 60 units with 28 remaining, because paid claims C008587 (6 units), C003566 (20) and C002078 (6) already used 32. We are requesting an increase to the authorization so the remaining units can be billed. The authorization ends 2026-11-30, so please confirm an increase before that date. Please also note this claim was submitted 68 days after care against a 45-day limit; editing the claim will not resolve that. Thank you.\"}",
+ "usage": {
+  "input_tokens": 1073,
+  "output_tokens": 916
+ }
+}

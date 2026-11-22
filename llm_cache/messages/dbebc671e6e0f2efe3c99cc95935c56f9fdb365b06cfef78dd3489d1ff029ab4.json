@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJFzRrpZvLb66zF9Y5yy",
+ "request_sha256": "dbebc671e6e0f2efe3c99cc95935c56f9fdb365b06cfef78dd3489d1ff029ab4",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Claim C020980: decide whether to reduce units from 36 to 32 before resubmitting\",\"body\":\"Claim C020980 for patient PT0099 (date of service 2026-09-07, Harbor Medicaid Plan) is predicted to be denied under D06. It bills 36 units of T1005 for 172.80, but the member's daily maximum is 32 units and no units have been paid for that day yet. Please decide whether to bill fewer units for this day. Reducing to 32 units would change the billed amount to 153.60. This decision is needed before we resubmit the claim. Visit V004093 is verified (clock-in 09:10, clock-out 18:12, 542 minutes).\"}",
+ "usage": {
+  "input_tokens": 970,
+  "output_tokens": 711
+ }
+}

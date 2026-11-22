@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJFsPCPiCHb1XR15mUGn",
+ "request_sha256": "490e20aef88b9830cdab05ee62cd64d084d12a29283c3064d621b1bda7edfcce",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Claim C019975 - no EVV visit recorded for 2026-10-14\",\"body\":\"Hello,\\n\\nClaim C019975 for patient PT0095 (service code T1005, 14 units, billed $67.20, date of service 2026-10-14) is about to be submitted, but our check shows no EVV visit recorded for this date. Our system predicts this claim would be denied (D01). Editing the claim will not fix this, and we should not bill it unless the visit is found.\\n\\nCould you please confirm whether this visit took place and whether it was recorded in EVV? If it was, please send us the visit details so we can verify it before submission. If it did not take place, please let us know so we can hold the claim.\\n\\nThe claim is scheduled for submission on 2026-11-01, so an answer before then would help us avoid a denial.\\n\\nThank you.\"}",
+ "usage": {
+  "input_tokens": 916,
+  "output_tokens": 282
+ }
+}

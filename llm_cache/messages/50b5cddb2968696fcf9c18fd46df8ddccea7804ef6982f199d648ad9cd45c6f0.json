@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJFuPkBXqrKrqx6scJ2T",
+ "request_sha256": "50b5cddb2968696fcf9c18fd46df8ddccea7804ef6982f199d648ad9cd45c6f0",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Claim C020349: EVV visit missing for 2026-10-01\",\"body\":\"Hello,\\n\\nClaim C020349 for patient PT0199 (service code T1019, date of service 2026-10-01, 32 units, billed $195.20) is predicted to be denied by Harbor Medicaid Plan because no EVV visit is recorded for that date. The claim cannot be fixed by editing it, and it should not be billed unless the visit is found.\\n\\nCould you please confirm whether this visit took place and was recorded in EVV? If it did, please send the visit details so we can verify it. If it did not, please let us know so the claim can be handled accordingly.\\n\\nThe claim is currently at 94 days from submission, so an answer before the filing limit would be appreciated.\\n\\nThank you.\"}",
+ "usage": {
+  "input_tokens": 916,
+  "output_tokens": 266
+ }
+}

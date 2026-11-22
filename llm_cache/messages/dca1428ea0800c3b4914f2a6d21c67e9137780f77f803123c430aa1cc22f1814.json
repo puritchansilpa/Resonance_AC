@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJFmd3f2Y8ujzMJG63df",
+ "request_sha256": "dca1428ea0800c3b4914f2a6d21c67e9137780f77f803123c430aa1cc22f1814",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Authorization increase request for claim C019361 (AUTH10492)\",\"body\":\"Hello, claim C019361 for patient PT0039 (date of service 2026-10-22, service code S5125) bills 9 units, but authorization AUTH10492 has only 2 of 40 units remaining. Paid claims C007827 (18 units), C015468 (10 units) and C019471 (10 units) have used the rest. C019471 is predicted paid rather than confirmed, so please check its status. Could you review AUTH10492 for an increase so the remaining 9 units can be billed? The claim is planned for submission on 2026-11-22, and the authorization ends 2026-11-30, so a decision before filing would help. If an increase is not possible, we will need to reduce the billed units to 2. Thank you for your help.\"}",
+ "usage": {
+  "input_tokens": 1019,
+  "output_tokens": 1181
+ }
+}

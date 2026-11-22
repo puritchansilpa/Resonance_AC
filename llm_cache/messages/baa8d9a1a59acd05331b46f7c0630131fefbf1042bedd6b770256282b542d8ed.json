@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJFzvwYSZdgGabMiMZUJ",
+ "request_sha256": "baa8d9a1a59acd05331b46f7c0630131fefbf1042bedd6b770256282b542d8ed",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Claim C021149 - EVV visit verification needed before billing\",\"body\":\"Hello,\\n\\nClaim C021149 for patient PT0012, service code S5125, date of service 2026-10-30, billed at 75.60 for 14 units, is currently predicted to be denied by Harbor Medicaid Plan (D01). The system shows no EVV visit recorded for this date.\\n\\nCould you please confirm whether this visit took place and was recorded? If an EVV visit can be located, please send us the details so we can review it. Per our records, the claim should not be billed unless the visit is verified, and it cannot be corrected by editing the claim itself.\\n\\nThis needs to be resolved before the claim is submitted, since submission is planned for 2027-01-02.\\n\\nThank you,\\nBilling Team\"}",
+ "usage": {
+  "input_tokens": 916,
+  "output_tokens": 270
+ }
+}

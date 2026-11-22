@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJFnZZLajoE8a5ie3cYQ",
+ "request_sha256": "76d33a973e486c9f2457098ead9acaa1be7eae58c2416379fba38e0b3e207bff",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Claim C019464 on hold: no EVV visit recorded for PT0072 on 2026-10-29\",\"body\":\"Hello,\\n\\nClaim C019464 (agency AG007, patient PT0072, service code S5125, 9 units, billed $48.60, date of service 2026-10-29) is predicted to be denied by Northwind Health Plan. There is no EVV visit recorded for this patient and service on that date, and the claim cannot be fixed by editing it. We should not bill it unless the visit is found.\\n\\nCould you confirm whether this visit took place and whether it was recorded in EVV? If it was, please send the visit details so we can verify it. If it was not, please let us know so we can close the claim without billing.\\n\\nThe claim is scheduled for submission on 2026-11-10, so an answer before then would help us avoid a denial.\\n\\nThank you.\"}",
+ "usage": {
+  "input_tokens": 913,
+  "output_tokens": 291
+ }
+}

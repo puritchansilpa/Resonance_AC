@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJFnQAnqw8nK73gMtmfy",
+ "request_sha256": "bbe33cbfd3b77a52d201d9b639bf18e8a728741444eda391256a0d76097fcff5",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Claim C019422 (PT0005, DOS 2026-09-21): EVV visit missing, please confirm\",\"body\":\"Hello,\\n\\nClaim C019422 for patient PT0005, service code S5125, date of service 2026-09-21, is about to be submitted for 24 units ($129.60) to Harbor Medicaid Plan. Our check shows no EVV visit recorded for this date, and the claim is predicted to be denied for that reason (D01).\\n\\nPlease confirm whether this visit took place and was recorded in EVV. If it was not recorded, we cannot bill this claim, and we will hold it. Your confirmation is needed before the claim is submitted, so please reply as soon as you can, ahead of the filing deadline.\\n\\nThank you.\"}",
+ "usage": {
+  "input_tokens": 916,
+  "output_tokens": 259
+ }
+}

@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJFwK9fJYKnqZ3GXxYDV",
+ "request_sha256": "4bbc783af9e9434be23d581e3c73f7d884907e0285c8fb0451361630988ba2c0",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Decision needed on claim C020683 unit change before resubmission\",\"body\":\"Claim C020683 (patient PT0181, date of service 2026-11-03, service S5125) is predicted to be denied as billed. It bills 9 units ($48.60), but the 127 verified minutes support only 8 units under the eight-minute rule (D09). It also exceeds the balance on authorization AUTH12447, which has only 6 of 112 units left (D02). The balance depends on claims C020157 and C021181, which are predicted paid but not confirmed. The proposed fix is to change units from 9 to 6 and the billed amount from $48.60 to $32.40. Please decide on this change before we resubmit, planned for 2026-11-10.\"}",
+ "usage": {
+  "input_tokens": 1077,
+  "output_tokens": 685
+ }
+}

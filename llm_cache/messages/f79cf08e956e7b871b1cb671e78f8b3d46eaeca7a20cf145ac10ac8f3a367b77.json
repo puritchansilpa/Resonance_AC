@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJFy3bamCKUQzDUuY6Va",
+ "request_sha256": "f79cf08e956e7b871b1cb671e78f8b3d46eaeca7a20cf145ac10ac8f3a367b77",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Claim C020748 on hold: visit V004046 pending aggregator verification\",\"body\":\"Hello,\\n\\nClaim C020748 (patient PT0100, date of service 2026-09-20, service code T1019, 24 units, billed $146.40, payer Northwind Health Plan) is not ready to submit. The only visit on that date, V004046 (clock-in 13:10, clock-out 19:06, 356 minutes), is still awaiting aggregator approval with status manual_edit_pending. Until it is verified, the claim is predicted to be denied under D01 because no visit on the date of service is verified. The claim cannot be fixed by editing it.\\n\\nCould you please follow up on visit V004046 with the aggregator and let me know once it is verified? I am holding the claim until then. The claim is scheduled for submission on 2026-10-05, so an update before that date would help us avoid a denial.\"}",
+ "usage": {
+  "input_tokens": 1076,
+  "output_tokens": 301
+ }
+}

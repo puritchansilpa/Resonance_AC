@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJFr9Q9nae1PsYf7iu2k",
+ "request_sha256": "c8f965a00100da81f98b691ae4f91aab856f2587e5e3a62f44204db21a194592",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Claim C019885 past payer filing limit - write-off decision needed\",\"body\":\"Hi billing lead,\\n\\nClaim C019885 (patient PT0217, date of service 2026-11-04, service code T1005, 20 units, billed $96.00) was submitted 2027-01-30, 87 days after care. Northwind Health Plan's filing limit is 45 days, so the claim is predicted to be denied (D03).\\n\\nEditing the claim cannot fix this timing issue, so it will not be paid as submitted. Could you review it and make a write-off decision? Please let me know your decision as soon as possible, since the claim is already past the filing limit and further delay will not change the outcome.\\n\\nThank you.\"}",
+ "usage": {
+  "input_tokens": 1001,
+  "output_tokens": 240
+ }
+}

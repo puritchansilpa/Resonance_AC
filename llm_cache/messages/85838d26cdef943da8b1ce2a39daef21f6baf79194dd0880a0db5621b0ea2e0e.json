@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJG6n2vsBjfZLXfK2Li9",
+ "request_sha256": "85838d26cdef943da8b1ce2a39daef21f6baf79194dd0880a0db5621b0ea2e0e",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Do not submit claim C021620 - duplicate of C006284\",\"body\":\"Hi billing lead,\\n\\nPlease do not submit claim C021620 (patient PT0024, service code T1005, date of service 2026-10-14, billed $115.20, 24 units). The same member, service and date are already billed as claim C006284, and our predicted result for C021620 is denial under D05 for duplicate submission.\\n\\nThe claim cannot be fixed by editing it, so it should be held rather than corrected and resent. Could you confirm on your side that C021620 is removed from the submission queue? It is scheduled for submission on 2026-10-29, so please confirm before that date.\\n\\nThank you.\"}",
+ "usage": {
+  "input_tokens": 972,
+  "output_tokens": 233
+ }
+}

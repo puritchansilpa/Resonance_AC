@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJFm7knvqB8yzbitbydt",
+ "request_sha256": "3d1e8a4e04dd1950aa45b8cf02fb0931b1c82b167afbe146805cd1d1ec187aae",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Claim C019329: request for authorization increase on AUTH12558\",\"body\":\"Hello,\\n\\nClaim C019329 for patient PT0190 (service code T1005, date of service 2026-11-04) is about to be submitted to Summit Care Partners for 24 units, billed at 115.20. Authorization AUTH12558 (2026-09-01 to 2026-11-30) allowed 132 units, and none remain, so this claim is predicted to deny for insufficient units.\\n\\nCould you please review AUTH12558 and request or confirm an increase in units so the remaining 24 units can be billed? The claim should be filed before the 2026-11-30 authorization end date, and we are working toward submission within that window.\\n\\nThank you for your help.\\n\\nBilling Team\"}",
+ "usage": {
+  "input_tokens": 1067,
+  "output_tokens": 261
+ }
+}

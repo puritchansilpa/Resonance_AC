@@ -1,0 +1,281 @@
+{
+  "baseline": "documents",
+  "model": "claude-opus-5-5",
+  "request_sha256": "ed5f2e4cd85d51a56f9b56b7bb700e360eaf791b8a1f2fb220ea51593c40fdd6",
+  "residual_groups": [
+    {
+      "payer_id": "PY03",
+      "actual": "D10",
+      "remark": "Contract amendment 3: services must be billed in whole hours",
+      "claims": 20,
+      "predicted": {
+        "D09": 8,
+        "paid": 11,
+        "D02": 1
+      }
+    },
+    {
+      "payer_id": "PY03",
+      "actual": "D10",
+      "remark": "Units not billable per amendment 3 (hourly increments)",
+      "claims": 15,
+      "predicted": {
+        "paid": 10,
+        "D05": 1,
+        "D09": 4
+      }
+    },
+    {
+      "payer_id": "PY01",
+      "actual": "D99",
+      "remark": "Denied - contact payer",
+      "claims": 14,
+      "predicted": {
+        "paid": 14
+      }
+    },
+    {
+      "payer_id": "PY02",
+      "actual": "D99",
+      "remark": "Denied - contact payer",
+      "claims": 13,
+      "predicted": {
+        "paid": 13
+      }
+    },
+    {
+      "payer_id": "PY02",
+      "actual": "D99",
+      "remark": "Under review - see payer correspondence",
+      "claims": 11,
+      "predicted": {
+        "paid": 11
+      }
+    },
+    {
+      "payer_id": "PY01",
+      "actual": "D99",
+      "remark": "Under review - see payer correspondence",
+      "claims": 9,
+      "predicted": {
+        "paid": 9
+      }
+    },
+    {
+      "payer_id": "PY03",
+      "actual": "D99",
+      "remark": "Under review - see payer correspondence",
+      "claims": 9,
+      "predicted": {
+        "paid": 9
+      }
+    },
+    {
+      "payer_id": "PY03",
+      "actual": "D99",
+      "remark": "Contract amendment 3: services must be billed in whole hours",
+      "claims": 8,
+      "predicted": {
+        "D09": 4,
+        "paid": 4
+      }
+    },
+    {
+      "payer_id": "PY03",
+      "actual": "D99",
+      "remark": "Denied - contact payer",
+      "claims": 5,
+      "predicted": {
+        "paid": 5
+      }
+    },
+    {
+      "payer_id": "PY03",
+      "actual": "D99",
+      "remark": "Units not billable per amendment 3 (hourly increments)",
+      "claims": 4,
+      "predicted": {
+        "paid": 4
+      }
+    },
+    {
+      "payer_id": "PY02",
+      "actual": "paid",
+      "remark": "",
+      "claims": 1,
+      "predicted": {
+        "D02": 1
+      }
+    }
+  ],
+  "hypotheses": [
+    {
+      "hypothesis": {
+        "hypothesis_id": "H1-PY03-WHOLE-HOURS",
+        "payer_id": "PY03",
+        "denial_code": "D10",
+        "kind": "whole_hours",
+        "params": {
+          "rounding": null,
+          "days": null,
+          "service_codes": null,
+          "modifier": null,
+          "days_of_week": null,
+          "max_units": null,
+          "units_per_hour": 4
+        },
+        "find_start_date": true,
+        "rationale": "Two remarks, 'Contract amendment 3: services must be billed in whole hours' and 'Units not billable per amendment 3 (hourly increments)', describe the same rule. Every cited claim bills units that are not a multiple of 4 (for example 9, 22, 7, 18, 33, 10, 30, 6, 17, 21, 25, 14). These are denied regardless of service code, weekday or modifier. The same remark also appears on some claims coded D99, which looks like inconsistent code reporting for the same cause. A June PY03 claim with 7 units (C014376, 2026-06-22) was not denied for this reason, while the earliest amendment-3 denial is 2026-07-01. The amendment likely took effect around July 1, 2026.",
+        "supporting_claim_ids": [
+          "C014259",
+          "C006770",
+          "C003575",
+          "C005557",
+          "C011312",
+          "C005591",
+          "C001719",
+          "C004092",
+          "C017317",
+          "C015756",
+          "C003243",
+          "C014083",
+          "C021440",
+          "C011858",
+          "C006154",
+          "C010808",
+          "C013275",
+          "C016569",
+          "C002179",
+          "C002219",
+          "C008100",
+          "C011222",
+          "C005597",
+          "C017583",
+          "C001113",
+          "C006366",
+          "C006198",
+          "C002910",
+          "C018067",
+          "C003828",
+          "C007278",
+          "C013827"
+        ]
+      },
+      "test": {
+        "claims_failing_rule": 157,
+        "without_start_date": {
+          "denied_with_code": 35,
+          "denied_d99": 14,
+          "denied_other_code": 25,
+          "paid": 83
+        },
+        "start_date_options": [
+          {
+            "basis": "date_of_service",
+            "start": "2026-07-01",
+            "after": {
+              "denied_with_code": 35,
+              "denied_d99": 12,
+              "denied_other_code": 5,
+              "paid": 0
+            },
+            "before": {
+              "denied_with_code": 0,
+              "denied_d99": 2,
+              "denied_other_code": 20,
+              "paid": 83
+            },
+            "last_paid_before": "2026-06-30",
+            "first_failing_after": "2026-07-01"
+          },
+          {
+            "basis": "submitted_date",
+            "start": "2026-08-20",
+            "after": {
+              "denied_with_code": 26,
+              "denied_d99": 6,
+              "denied_other_code": 10,
+              "paid": 0
+            },
+            "before": {
+              "denied_with_code": 9,
+              "denied_d99": 8,
+              "denied_other_code": 15,
+              "paid": 83
+            },
+            "last_paid_before": "2026-08-19",
+            "first_failing_after": "2026-08-20"
+          }
+        ],
+        "verdict": "supported",
+        "basis": "date_of_service",
+        "start": "2026-07-01",
+        "support": 35,
+        "also_denied_d99": 12,
+        "contradictions": 0
+      },
+      "proposed_rule": {
+        "rule_id": "PY03-LEARNED-H1-PY03-WHOLE-HOURS",
+        "kind": "whole_hours",
+        "denial_code": "D10",
+        "params": {
+          "units_per_hour": 4
+        },
+        "source": {
+          "type": "learned_from_history",
+          "ref": "Hypothesis H1-PY03-WHOLE-HOURS from payer remarks (claimcheck.hypotheses)",
+          "quote": "Contract amendment 3: services must be billed in whole hours",
+          "evidence": "157 history claims would fail this rule. From 2026-07-01 (by date of service): 35 denied D10, 12 denied D99, 0 paid. Two remarks, 'Contract amendment 3: services must be billed in whole hours' and 'Units not billable per amendment 3 (hourly increments)', describe the same rule. Every cited claim bills units that are not a multiple of 4 (for example 9, 22, 7, 18, 33, 10, 30, 6, 17, 21, 25, 14). These are denied regardless of service code, weekday or modifier. The same remark also appears on some claims coded D99, which looks like inconsistent code reporting for the same cause. A June PY03 claim with 7 units (C014376, 2026-06-22) was not denied for this reason, while the earliest amendment-3 denial is 2026-07-01. The amendment likely took effect around July 1, 2026."
+        },
+        "effective": {
+          "basis": "date_of_service",
+          "from": "2026-07-01"
+        }
+      },
+      "backtest": {
+        "claims_fixed": 35,
+        "claims_broken": 0,
+        "broken_examples": [],
+        "exact_accuracy_before": 0.9715,
+        "exact_accuracy_after": 0.9807
+      }
+    }
+  ],
+  "not_explainable": [
+    {
+      "payer_id": "PY01",
+      "remark": "Denied - contact payer",
+      "reason": "No usable denial reason. Claims are timely, fully supported by verified time and have authorizations, with no common pattern."
+    },
+    {
+      "payer_id": "PY01",
+      "remark": "Under review - see payer correspondence",
+      "reason": "Pending review status with no stated reason; no common pattern in the claim facts."
+    },
+    {
+      "payer_id": "PY02",
+      "remark": "Denied - contact payer",
+      "reason": "No usable denial reason; claims vary in service, weekday, units and filing lag."
+    },
+    {
+      "payer_id": "PY02",
+      "remark": "Under review - see payer correspondence",
+      "reason": "Pending review status with no stated reason; no common pattern."
+    },
+    {
+      "payer_id": "PY03",
+      "remark": "Under review - see payer correspondence",
+      "reason": "Pending review status with no stated reason. Units are mostly whole hours, so the amendment-3 rule does not explain this group."
+    },
+    {
+      "payer_id": "PY03",
+      "remark": "Denied - contact payer",
+      "reason": "No usable denial reason. Units are whole hours and claims are timely and supported."
+    },
+    {
+      "payer_id": "PY02",
+      "remark": "",
+      "reason": "A single claim (C012372) was paid although the engine predicted D02 (authorization balance). This is likely an authorization balance or data timing difference, not an unpublished rule."
+    }
+  ]
+}

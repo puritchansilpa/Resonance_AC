@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJG7QmHCArqRcHr3wj2Y",
+ "request_sha256": "6d071628b2a713d9539c6def94ba6c545f45228e043bf9dce7370757264f88c3",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Claim C021649 past filing limit - write-off decision needed\",\"body\":\"Hi billing lead,\\n\\nClaim C021649 (patient PT0264, date of service 2026-09-22, service code T1019, 32 units, billed $195.20) was submitted 2026-11-08, 47 days after care. Northwind Health Plan's filing limit is 45 days, so the payer is predicted to deny it under D03. Editing the claim cannot fix this.\\n\\nThe claim also duplicates C018412, which is already billed and paid or predicted paid for the same member, service and date (predicted denial D05). Please do not submit C021649.\\n\\nWe need a write-off decision on C021649. Please advise before the claim is closed out so we can record the outcome correctly. Thank you.\"}",
+ "usage": {
+  "input_tokens": 1093,
+  "output_tokens": 262
+ }
+}

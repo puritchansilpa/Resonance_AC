@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJG4h9CAZZkEJhHC7EKC",
+ "request_sha256": "4c5c812e4854099c74c48d8bfd0569097a915aa9e4d3839fc19d5ddb782c00fc",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Claim C021393 (PT0116, DOS 2026-10-20): decide whether to reduce units from 20 to 8\",\"body\":\"Billing lead, claim C021393 for patient PT0116 (date of service 2026-10-20, service T1005, payer Harbor Medicaid Plan) is predicted to be denied under D06. The member already has 24 units paid for that day, so 24 plus 20 totals 44, over the 32-unit daily maximum. The visit is verified at 300 minutes. Option: reduce units from 20 to 8 and the billed amount from 96.00 to 38.40. Please decide whether to make this change before the claim is resubmitted. Note that the units counted toward the 24 come from claims C019463 and C021390, which are predicted paid but not confirmed as paid, so the total may change. Thank you.\"}",
+ "usage": {
+  "input_tokens": 1012,
+  "output_tokens": 634
+ }
+}

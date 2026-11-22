@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJFuF7HCWkn5i22gZTMf",
+ "request_sha256": "2d2c76dd2b76c3cb35cbe76f0fe031969e21194fc0c27823c503185edfab3c53",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Claim C020342 (PT0121, DOS 2026-10-01): EVV visit not recorded\",\"body\":\"Hello,\\n\\nClaim C020342 for patient PT0121, service code T1005, 32 units, date of service 2026-10-01, is about to be submitted to Northwind Health Plan. Our system shows no EVV visit recorded for this date, and the claim is predicted to deny (D01). We should not bill it unless the visit is found.\\n\\nCould you please confirm whether this visit took place and was recorded in EVV? If it was, please send the visit details so we can verify it. If it was not, please let us know so we can hold the claim.\\n\\nThank you. Please reply before the claim is submitted, as we cannot bill without a verified visit.\\n\\nBilling Team\"}",
+ "usage": {
+  "input_tokens": 913,
+  "output_tokens": 264
+ }
+}

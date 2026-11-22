@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJFycHrcvoNsdkCUuQHX",
+ "request_sha256": "54d3dc34d38afbe16a158f277a10e9c4f5e5ea01cd7d172a77540239ab536e9c",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Claim C020836 (PT0114, DOS 2026-09-10): EVV visit not recorded\",\"body\":\"Hello,\\n\\nClaim C020836 for patient PT0114, service code T1019, date of service 2026-09-10, is flagged as likely to be denied. Our records show no EVV visit recorded for this date, so the claim cannot be billed as it stands. Editing the claim will not resolve this.\\n\\nCould you please confirm whether this visit took place and was recorded in EVV? If you can locate a verified visit, please send the details and we will proceed. If no visit occurred, please let us know so we can close the claim.\\n\\nThe claim is currently scheduled for submission on 2026-10-31, so we would appreciate your response before then.\\n\\nThank you.\"}",
+ "usage": {
+  "input_tokens": 912,
+  "output_tokens": 260
+ }
+}

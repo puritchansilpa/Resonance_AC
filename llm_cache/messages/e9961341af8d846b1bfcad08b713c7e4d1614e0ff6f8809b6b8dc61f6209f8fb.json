@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJG5hihGuMZTbTAGX8Jh",
+ "request_sha256": "e9961341af8d846b1bfcad08b713c7e4d1614e0ff6f8809b6b8dc61f6209f8fb",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Do not submit claim C021592: duplicate of C004966\",\"body\":\"Hello, please do not submit claim C021592 for patient PT0005, service S5125, date of service 2026-09-30, billed at 162.00. It duplicates C004966, the same member, service and date, which is already billed and paid or predicted paid. Editing will not fix it. The claim also needs units changed from 30 to 2, but that does not resolve the duplicate. It is predicted denied under D05 and under D06 because 30 units were already paid that day, and adding 30 exceeds the 32-unit daily maximum for Harbor Medicaid Plan (PY02). Units were drawn by claims-to-check C019231, which is predicted paid, not confirmed paid. Please hold C021592 and remove it from the batch before the planned submission on 2026-10-16.\"}",
+ "usage": {
+  "input_tokens": 1084,
+  "output_tokens": 960
+ }
+}

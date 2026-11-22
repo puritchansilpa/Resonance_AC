@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJFjvsQv8kCqF2SNv1kK",
+ "request_sha256": "bcdcb17555c25a1a43e1873b1e915a80da062b143b92f4fd7730bd0719a91de0",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Claim C019199: decision needed on reducing billed units from 36 to 32\",\"body\":\"Billing lead, claim C019199 (patient PT0187, service T1005, date of service 2026-11-10) is set to bill 36 units for 172.80. Our check predicts denial D06 with Harbor Medicaid Plan: no units are yet paid for this member that day, so 36 units would exceed the 32-unit daily maximum. The visit (V003745) is verified at 554 minutes, and authorization AUTH12508 has 146 units remaining. Could you decide whether to bill 32 units for 153.60 before we resubmit? About 65 days remain to submit.\"}",
+ "usage": {
+  "input_tokens": 970,
+  "output_tokens": 880
+ }
+}

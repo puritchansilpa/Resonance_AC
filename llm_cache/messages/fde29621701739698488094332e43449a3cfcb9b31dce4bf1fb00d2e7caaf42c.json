@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJG7FujeaEWYuw1TrCG5",
+ "request_sha256": "fde29621701739698488094332e43449a3cfcb9b31dce4bf1fb00d2e7caaf42c",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Do not submit claim C021642 - duplicate of C016915\",\"body\":\"Hi billing lead,\\n\\nPlease do not submit claim C021642 (agency AG012, patient PT0133, date of service 2026-10-12, service T1005, 28 units, $134.40). It duplicates claim C016915, which is already billed and paid or predicted paid for the same member, service and date.\\n\\nThe claim also fails the payer's daily unit maximum (28 units already paid that day plus 28 would exceed 32). Editing the claim cannot fix this, and the fix note lists units 28 to 4 as well.\\n\\nPlease confirm you have removed C021642 from the submission queue. Our planned submission date is 2026-12-11, so please confirm before then.\\n\\nThank you.\"}",
+ "usage": {
+  "input_tokens": 1084,
+  "output_tokens": 263
+ }
+}

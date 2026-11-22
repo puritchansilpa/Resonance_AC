@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJFuYv6CYg1nw4EXmhkP",
+ "request_sha256": "8c5f49b8cf41aa91da1e981ad30ba67877536ad19f0cd9e417e86f925d9d9f34",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Claim C020368 (PT0190): request for authorization AUTH12558 unit increase\",\"body\":\"Hello,\\n\\nClaim C020368 for patient PT0190 (date of service 2026-10-29, service code T1005) is ready to submit with 18 units billed, but authorization AUTH12558 has 0 of 132 units remaining. The units were used by previously paid claims, including C020626, which we understand is predicted paid but not yet confirmed.\\n\\nPlease review AUTH12558 and let us know whether additional units can be authorized so this visit can be billed. Our claim is scheduled to be submitted with a filing deadline in mind, so a response before the claim is filed would help. Note that the billing team is also reviewing whether units should be adjusted from 18 to 16 to match whole hours.\\n\\nThank you for your help.\"}",
+ "usage": {
+  "input_tokens": 1181,
+  "output_tokens": 281
+ }
+}

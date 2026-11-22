@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJFujdGqeHRKU2piqgZ5",
+ "request_sha256": "54ad5f96f0cf624eb42049891010b2c8fdde6e4d48ba2bbe98b287a4529c2646",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Claim C020398: decide whether to bill 32 units before resubmitting\",\"body\":\"Claim C020398 (patient PT0170, service code T1005, date of service 2026-09-30) is predicted to deny with reason D06. Billing 36 units would exceed the member's 32-unit daily maximum. Please decide whether to bill 32 units instead, which would change the billed amount from 172.80 to 153.60. The review also flagged that claim C020483 draws on the same day's units. Those claims are predicted paid, not known to be paid, so the zero-units-already-paid figure is not confirmed. Please let me know your decision before we resubmit.\"}",
+ "usage": {
+  "input_tokens": 1008,
+  "output_tokens": 730
+ }
+}

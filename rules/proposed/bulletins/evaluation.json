@@ -1,0 +1,41 @@
+{
+  "PY01": {
+    "bulletin": "PY01_northwind_bulletin_2026-07.md",
+    "rules_matching_approved": "8/8",
+    "parameter_differences": [],
+    "missing": [],
+    "extra": [],
+    "end_dates_correct": true,
+    "drafted_end_rules": {
+      "PY01-TIMELY-30": "2026-07-31"
+    },
+    "rules_left_untouched": "6/6",
+    "unverified_quotes": [],
+    "open_questions": [],
+    "valid": true
+  },
+  "PY02": {
+    "bulletin": "PY02_harbor_bulletin_2026-08.md",
+    "rules_matching_approved": "10/10",
+    "parameter_differences": [],
+    "missing": [],
+    "extra": [],
+    "end_dates_correct": true,
+    "drafted_end_rules": {
+      "PY02-MOD-U2": "2026-08-31"
+    },
+    "rules_left_untouched": "7/7",
+    "unverified_quotes": [],
+    "open_questions": [
+      {
+        "quote": "from dates of service on 1 September 2026",
+        "question": "The bulletin says 'on' 1 September 2026, not 'on or after'. The draft reads it as on or after 2026-09-01, with the old all-days U2 rule ending 2026-08-31. Please confirm with Harbor."
+      },
+      {
+        "quote": "must be billed with modifier U3 instead of U2",
+        "question": "The draft treats U3 as replacing U2 on weekend T1019 claims. Please confirm whether Harbor denies a weekend claim that carries both U2 and U3, or only one that lacks U3. The modifier_required rule only checks that U3 is present."
+      }
+    ],
+    "valid": true
+  }
+}

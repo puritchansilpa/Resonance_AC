@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJG2AvhF6wbXdYDTqiVR",
+ "request_sha256": "2fcc5835ea9fc059674e7caa34b92ead78e5ece8727762259162f55626d30ef1",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Claim C021285 (PT0075, DOS 2026-09-02): EVV visit not recorded\",\"body\":\"Hello,\\n\\nClaim C021285 for patient PT0075, service code T1005, 28 units, date of service 2026-09-02, billed at $134.40 for Harbor Medicaid Plan, is predicted to be denied because no EVV visit is recorded for this patient and date. Our system shows no visits on file for this claim.\\n\\nPlease confirm whether this visit took place and whether it was recorded in EVV. If it was not recorded, please let us know so we can decide next steps. We should not bill this claim unless a verified visit is found.\\n\\nThe claim is scheduled for submission on 2026-09-22, so an answer before then would help us avoid a denial.\\n\\nThank you.\"}",
+ "usage": {
+  "input_tokens": 916,
+  "output_tokens": 272
+ }
+}

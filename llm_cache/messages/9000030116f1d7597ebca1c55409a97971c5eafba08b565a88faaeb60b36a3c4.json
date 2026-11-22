@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJFjQNcDXugE6a9hA9fC",
+ "request_sha256": "9000030116f1d7597ebca1c55409a97971c5eafba08b565a88faaeb60b36a3c4",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Do not submit claim C019155 - duplicate of C021747\",\"body\":\"Hi billing lead,\\n\\nPlease do not submit claim C019155 (patient PT0178, service code T1005, date of service 2026-09-14, 32 units, billed amount 153.60). The same member, service and date were already submitted as claim C021747, and the payer's prediction for C019155 is denial under D05 (duplicate submission). The claim cannot be corrected by editing, so it should be held rather than filed.\\n\\nPlease confirm once you have stopped C019155 from going out. It is scheduled for submission in 19 days, so I'd appreciate confirmation before then.\\n\\nThank you.\"}",
+ "usage": {
+  "input_tokens": 972,
+  "output_tokens": 231
+ }
+}

@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJFqq64fk48MBTx3Fqoq",
+ "request_sha256": "a1d1cd929717642ee8fcb8207f7032152e0a8df2dab79ca64b8e02b8ce69704b",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Claim C019847: EVV visit missing for 2026-10-16\",\"body\":\"Hello,\\n\\nClaim C019847 for patient PT0159, service code T1005, 30 units, billed at $144.00 for date of service 2026-10-16, is currently predicted to be denied. There is no EVV visit recorded for this date, and the claim cannot be fixed by editing it.\\n\\nCould you please confirm whether this visit took place and was recorded? If it was, please send the visit details so we can verify it. Without a verified visit, we cannot bill this claim.\\n\\nThe claim is scheduled for submission on 2026-10-22, so an answer before then would help us avoid a denial.\\n\\nThank you.\"}",
+ "usage": {
+  "input_tokens": 916,
+  "output_tokens": 239
+ }
+}

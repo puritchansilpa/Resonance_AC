@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJG8DYsxTtDvKVqzmp6E",
+ "request_sha256": "a2e244b4fa61305dd95f49062876f3b47525c757b27d8b8dec79bdab8881cf6a",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Do not submit claim C021675: duplicate of C008989\",\"body\":\"Hi billing lead,\\n\\nPlease do not submit claim C021675 (patient PT0088, service T1019, date of service 2026-10-10, 12 units, $73.20). The same member, service and date were already billed as claim C008989, and the payer's prediction is a denial with reason D05 for duplicate submission. The claim cannot be fixed by editing, so it should be held rather than corrected.\\n\\nPlease confirm once you have stopped C021675 from going out. The planned submission date is 2026-11-07, so it is best to confirm before then to avoid a duplicate filing.\\n\\nThank you.\"}",
+ "usage": {
+  "input_tokens": 973,
+  "output_tokens": 230
+ }
+}

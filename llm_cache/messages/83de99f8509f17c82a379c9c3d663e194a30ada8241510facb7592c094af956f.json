@@ -1,0 +1,11 @@
+{
+ "model": "claude-haiku-5-5",
+ "request_id": "req_011ChJFiZ2j7uDsGPFCvZxxB",
+ "request_sha256": "83de99f8509f17c82a379c9c3d663e194a30ada8241510facb7592c094af956f",
+ "stop_reason": "end_turn",
+ "text": "{\"subject\":\"Do not submit claim C019060 - duplicate of C021733\",\"body\":\"Hi billing lead,\\n\\nPlease do not submit claim C019060 (patient PT0049, service code S5125, date of service 2026-10-22, 8 units, $43.20). The same member, service and date were already billed as claim C021733, and the payer's prediction for C019060 is denial under D05 for that duplicate.\\n\\nThe claim cannot be corrected by editing, so it should be held or closed rather than filed. Please confirm once it has been removed from the submission queue. This should be handled before the claim's submission date, since submitting it would create a duplicate denial on the payer record.\\n\\nThank you.\"}",
+ "usage": {
+  "input_tokens": 973,
+  "output_tokens": 231
+ }
+}
