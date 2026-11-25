@@ -61,8 +61,12 @@ demo replays the same drafts without calling the model.
 - Approving changes the rule-set fingerprint printed on every prediction.
 
 ## Reset afterwards
-The demo writes the registry, the stored manual and PY04's rule files. To remove them:
+The demo writes the registry, the stored documents, PY04's draft and rule files, and any reviewer
+corrections. This removes whichever of them exist (missing ones are skipped silently; notices uploaded
+in the app are stored as `PY04__<file name>`, which the wildcard covers):
 ```powershell
-Remove-Item -Recurse -Force onboarding, rules/PY04.json, rules/proposed/PY04.json, rules/proposed/PY04.meta.json, rules/proposed/bulletins/lakeside_notice_2026-10.json, rules/proposed/bulletins/lakeside_notice_2026-10.meta.json
+Remove-Item -Recurse -Force -ErrorAction SilentlyContinue onboarding, rules/PY04.json, rules/proposed/PY04.json, rules/proposed/PY04.meta.json, rules/proposed/bulletins/*lakeside_notice*, rules/extraction_corrections.jsonl
 ```
-Keep the `llm_cache/` and `rules/proposed/cache/` entries if you want the next run to replay.
+Then restart the app so it reloads the rule set. Keep the `llm_cache/` and `rules/proposed/cache/`
+entries: they let the next run replay the same drafts without calling Claude. The cached Lakeside draft
+from rehearsal scored 8/8 against the answer key, with both untranslatable clauses raised as open questions.
